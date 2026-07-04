@@ -1,3 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+:root {
+  --t-primary: #2563eb;
+  --t-primary-hover: #1d4ed8;
+  --t-secondary: #64748b;
+  --t-secondary-hover: #475569;
+  --t-success: #16a34a;
+  --t-success-hover: #15803d;
+  --t-info: #0284c7;
+  --t-info-hover: #0369a1;
+  --t-warning: #d97706;
+  --t-warning-hover: #b45309;
+  --t-danger: #dc2626;
+  --t-danger-hover: #b91c1c;
+  --t-surface: #ffffff;
+  --t-surface-muted: #f8fafc;
+  --t-muted-surface: #f1f5f9;
+  --t-text: #111827;
+  --t-muted-text: #6b7280;
+  --t-border: #e5e7eb;
+  --t-radius: 0.75rem;
+  --t-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --t-transition: 150ms ease;
+  --t-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  color-scheme: light;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--t-surface);
+  color: var(--t-text);
+}

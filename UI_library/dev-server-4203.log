@@ -1,0 +1,609 @@
+> Building...
+√ Building...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-H5Z2V6BE.js    | button-demo-component |  49.59 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-6UVWBEQQ.mjs   | button-demo-component |  49.62 kB | 
+
+Application bundle generation complete. [2.768 seconds] - 2026-07-04T17:41:07.411Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4203[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles    
+Initial chunk files | Names                 | Raw size
+main.js             | main                  |  5.13 kB | 
+
+Lazy chunk files    | Names                 | Raw size
+chunk-JXOFSG7L.js   | button-demo-component | 50.27 kB | 
+
+
+Server bundles     
+Initial chunk files | Names                 | Raw size
+main.server.mjs     | main.server           |  6.38 kB | 
+
+Lazy chunk files    | Names                 | Raw size
+chunk-EZJ7IVLR.mjs  | button-demo-component | 50.30 kB | 
+
+Application bundle generation complete. [0.591 seconds] - 2026-07-04T17:50:55.599Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.359 seconds] - 2026-07-04T17:50:56.092Z
+
+Component update sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.093 seconds] - 2026-07-04T17:55:44.182Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.093 seconds] - 2026-07-04T17:55:53.536Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.043 seconds] - 2026-07-04T17:59:59.358Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.046 seconds] - 2026-07-04T18:05:32.576Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.052 seconds] - 2026-07-04T18:06:06.876Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.054 seconds] - 2026-07-04T18:06:07.250Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.053 seconds] - 2026-07-04T18:06:12.883Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.033 seconds] - 2026-07-04T18:06:14.462Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.050 seconds] - 2026-07-04T18:06:15.240Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.035 seconds] - 2026-07-04T18:11:48.320Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.030 seconds] - 2026-07-04T18:11:50.728Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.035 seconds] - 2026-07-04T18:13:03.478Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.039 seconds] - 2026-07-04T18:15:55.903Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.036 seconds] - 2026-07-04T18:16:10.296Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.040 seconds] - 2026-07-04T18:18:34.664Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-JXOFSG7L.js    | button-demo-component |  50.27 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-EZJ7IVLR.mjs   | button-demo-component |  50.30 kB | 
+
+Application bundle generation complete. [0.041 seconds] - 2026-07-04T18:21:11.902Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Application bundle generation failed. [0.433 seconds] - 2026-07-04T18:24:21.605Z
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'ariaLabelAttr' does not exist on type 'TButton'. Did you mean 'ariaLabel'?[0m [1m[35m[plugin angular-compiler][0m
+
+    projects/ui/src/lib/components/button/button.component.ts:71:40:
+[37m      71 │ ...eLabel = computed(() => this.[32mariaLabelAttr[37m() ?? this.ariaLabel());
+         ╵                                 [32m~~~~~~~~~~~~~[0m
+
+  'ariaLabel' is declared here.
+
+    projects/ui/src/lib/components/button/button.component.ts:43:2:
+[37m      43 │   [32mariaLabel[37m = input<string | null>(null);
+         ╵   [32m~~~~~~~~~[0m
+
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-BZPIQHZE.js    | button-demo-component |  49.91 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-YK7PRSGS.mjs   | button-demo-component |  49.94 kB | 
+
+Application bundle generation complete. [0.331 seconds] - 2026-07-04T18:25:52.047Z
+
+Page reload sent to client(s).
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-BZPIQHZE.js    | button-demo-component |  49.91 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-YK7PRSGS.mjs   | button-demo-component |  49.94 kB | 
+
+Application bundle generation complete. [0.032 seconds] - 2026-07-04T18:27:08.834Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles     
+Initial chunk files  | Names                 |  Raw size
+styles.css           | styles                |  11.59 kB | 
+main.js              | main                  |   5.13 kB | 
+chunk-VUJOFXKG.js    | -                     | 938 bytes | 
+
+                     | Initial total         |  17.65 kB
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-BZPIQHZE.js    | button-demo-component |  49.91 kB | 
+
+
+Server bundles      
+Initial chunk files  | Names                 |  Raw size
+main.server.mjs      | main.server           |   6.38 kB | 
+server.mjs           | server                |   1.84 kB | 
+chunk-54EZUNS5.mjs   | -                     | 972 bytes | 
+polyfills.server.mjs | polyfills.server      | 268 bytes | 
+
+Lazy chunk files     | Names                 |  Raw size
+chunk-YK7PRSGS.mjs   | button-demo-component |  49.94 kB | 
+
+Application bundle generation complete. [0.035 seconds] - 2026-07-04T18:27:11.890Z
+
+> Changes detected. Rebuilding...
+√ Changes detected. Rebuilding...
+Browser bundles    
+Initial chunk files | Names                 | Raw size
+main.js             | main                  |  5.13 kB | 
+
+Lazy chunk files    | Names                 | Raw size
+chunk-4DPXCOVB.js   | button-demo-component | 49.90 kB | 
+
+
+Server bundles     
+Initial chunk files | Names                 | Raw size
+main.server.mjs     | main.server           |  6.38 kB | 
+
+Lazy chunk files    | Names                 | Raw size
+chunk-NLJCDDCS.mjs  | button-demo-component | 49.93 kB | 
+
+Application bundle generation complete. [0.319 seconds] - 2026-07-04T18:30:42.044Z
+
+Component update sent to client(s).

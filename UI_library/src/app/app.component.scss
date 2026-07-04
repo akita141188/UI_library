@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.demo-nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--t-border, #e5e7eb);
+  background: var(--t-surface, #ffffff);
+}
+
+.demo-nav a {
+  border-radius: 999px;
+  color: var(--t-muted-text, #6b7280);
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  text-decoration: none;
+}
+
+.demo-nav a:hover,
+.demo-nav a.active {
+  background: var(--t-muted-surface, #f1f5f9);
+  color: var(--t-text, #111827);
+}
+
+.demo-main {
+  padding: 2rem;
+}
+
+@media (max-width: 520px) {
+  .demo-nav,
+  .demo-main {
+    padding-inline: 1rem;
+  }
+}

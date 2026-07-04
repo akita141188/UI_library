@@ -1,0 +1,152 @@
+<section class="demo-page">
+  <ng-template #viewIcon>
+    <svg class="demo-template-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M12 5c4.2 0 7.4 3.4 8.7 6.2.2.5.2 1.1 0 1.6C19.4 15.6 16.2 19 12 19s-7.4-3.4-8.7-6.2a2 2 0 0 1 0-1.6C4.6 8.4 7.8 5 12 5Zm0 2c-3.2 0-5.8 2.5-6.9 5 1.1 2.5 3.7 5 6.9 5s5.8-2.5 6.9-5C17.8 9.5 15.2 7 12 7Zm0 2.25a2.75 2.75 0 1 1 0 5.5 2.75 2.75 0 0 1 0-5.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  </ng-template>
+
+  <header class="demo-hero">
+    <h1>Button</h1>
+    <p>Trigger actions with intent, loading states, icons, and responsive sizing.</p>
+  </header>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Basic</h2>
+      <p>Default actions with primary and secondary emphasis.</p>
+    </div>
+    <div class="demo-row">
+      <t-button>Save</t-button>
+      <t-button variant="secondary">Cancel</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Variants</h2>
+      <p>Use variants to communicate action intent. Link is still a button action.</p>
+    </div>
+    <div class="demo-row">
+      <t-button variant="primary">Primary</t-button>
+      <t-button variant="secondary">Secondary</t-button>
+      <t-button variant="success">Success</t-button>
+      <t-button variant="info">Info</t-button>
+      <t-button variant="warning">Warning</t-button>
+      <t-button variant="danger">Danger</t-button>
+      <t-button variant="outline">Outline</t-button>
+      <t-button variant="ghost">Ghost</t-button>
+      <t-button variant="text">Text</t-button>
+      <t-button variant="link">Reset filter</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Sizes</h2>
+      <p>Three stable sizes for dense, standard, and spacious layouts.</p>
+    </div>
+    <div class="demo-row">
+      <t-button size="sm">Small</t-button>
+      <t-button>Medium</t-button>
+      <t-button size="lg">Large</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Loading / Disabled</h2>
+      <p>Busy and unavailable actions are visually distinct and non-interactive.</p>
+    </div>
+    <div class="demo-row">
+      <t-button loading>Saving</t-button>
+      <t-button disabled>Disabled</t-button>
+      <t-button [loading]="saving()" (clicked)="save()">Save</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Icons</h2>
+      <p>Text icons and image icons support left and right positions.</p>
+    </div>
+    <div class="demo-row">
+      <t-button icon="+">Create</t-button>
+      <t-button icon=">" iconPosition="right">Next</t-button>
+      <t-button iconSrc="assets/icons/save.svg">Save</t-button>
+      <t-button iconSrc="assets/icons/refresh.svg" iconPosition="right">Refresh</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Template icon</h2>
+      <p>TemplateRef icons use the same icon input and honor iconPosition.</p>
+    </div>
+    <div class="demo-row">
+      <t-button [icon]="viewIcon">View</t-button>
+      <t-button [icon]="viewIcon" iconPosition="right">View right</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Custom projected icon</h2>
+      <p>Projected SVGs with tButtonIcon stay aligned with the requested position.</p>
+    </div>
+    <div class="demo-row">
+      <t-button>
+        <svg tButtonIcon viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 3 3 8l9 5 9-5-9-5Zm-7 8.2v4.6l7 3.9 7-3.9v-4.6l-7 3.9-7-3.9Z"
+            fill="currentColor"
+          />
+        </svg>
+        Custom icon
+      </t-button>
+      <t-button iconPosition="right">
+        <svg tButtonIcon viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 3 3 8l9 5 9-5-9-5Zm-7 8.2v4.6l7 3.9 7-3.9v-4.6l-7 3.9-7-3.9Z"
+            fill="currentColor"
+          />
+        </svg>
+        Custom icon right
+      </t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Icon only</h2>
+      <p>Icon-only buttons use ariaLabel for their accessible name.</p>
+    </div>
+    <div class="demo-row">
+      <t-button iconOnly ariaLabel="Create" icon="+"></t-button>
+      <t-button iconOnly ariaLabel="Save" iconSrc="assets/icons/save.svg"></t-button>
+      <t-button iconOnly ariaLabel="View" [icon]="viewIcon"></t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Rounded / Raised</h2>
+      <p>Optional shape and shadow treatments for higher emphasis.</p>
+    </div>
+    <div class="demo-row">
+      <t-button rounded>Rounded</t-button>
+      <t-button raised>Raised</t-button>
+      <t-button rounded raised>Rounded raised</t-button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Fluid</h2>
+      <p>Fluid buttons fill the available inline space.</p>
+    </div>
+    <t-button fluid>Full width</t-button>
+  </section>
+</section>

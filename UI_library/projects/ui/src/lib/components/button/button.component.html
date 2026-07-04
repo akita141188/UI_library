@@ -1,0 +1,48 @@
+<button
+  class="t-button"
+  [class.t-button--primary]="variant() === 'primary'"
+  [class.t-button--secondary]="variant() === 'secondary'"
+  [class.t-button--success]="variant() === 'success'"
+  [class.t-button--info]="variant() === 'info'"
+  [class.t-button--warning]="variant() === 'warning'"
+  [class.t-button--danger]="variant() === 'danger'"
+  [class.t-button--outline]="variant() === 'outline'"
+  [class.t-button--ghost]="variant() === 'ghost'"
+  [class.t-button--text]="variant() === 'text'"
+  [class.t-button--link]="variant() === 'link'"
+  [class.t-button--sm]="size() === 'sm'"
+  [class.t-button--md]="size() === 'md'"
+  [class.t-button--lg]="size() === 'lg'"
+  [class.t-button--fluid]="fluid()"
+  [class.t-button--rounded]="rounded()"
+  [class.t-button--raised]="raised()"
+  [class.t-button--icon-only]="iconOnly()"
+  [class.t-button--loading]="loading()"
+  [class.t-button--icon-right]="iconOnRight()"
+  [type]="type()"
+  [disabled]="isDisabled()"
+  [attr.aria-label]="accessibleLabel()"
+  [attr.aria-busy]="loading() ? 'true' : null"
+  [attr.tabindex]="tabindex()"
+  (click)="onClick($event)"
+>
+  <span class="t-button__spinner" [hidden]="!loading()" aria-hidden="true"></span>
+
+  <span class="t-button__icon" [hidden]="loading() || !showIcon()" aria-hidden="true">
+    <ng-content select="[tButtonIcon]" />
+
+    @if (!loading() && !hasProjectedIcon()) {
+      @if (iconSrc()) {
+        <img class="t-button__icon-image" [src]="iconSrc()" alt="" aria-hidden="true" />
+      } @else if (iconTemplate(); as templateIcon) {
+        <ng-container [ngTemplateOutlet]="templateIcon" />
+      } @else if (iconText()) {
+        <span>{{ iconText() }}</span>
+      }
+    }
+  </span>
+
+  <span class="t-button__label" [hidden]="iconOnly()">
+    <ng-content />
+  </span>
+</button>

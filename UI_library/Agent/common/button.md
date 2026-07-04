@@ -1,207 +1,66 @@
-# Skill: TButton Component - Angular v21 UI Library
+# TButton Standard - Angular v21 UI Library
 
-> Skill này dùng để hướng dẫn AI/codegen xây dựng component `TButton` cho UI Library Angular v21.  
-> Component học cách tổ chức API và trải nghiệm sử dụng từ PrimeNG Button, nhưng **không copy PrimeNG**, **không phụ thuộc PrimeNG**, và phải tuân thủ rule riêng của UI Library/TRỤC.
+File chuẩn cho component `TButton`. Dùng file này làm mẫu để viết spec cho các component sau.
+
+Mục tiêu: `TButton` là action component nền tảng của UI Library. API phải dễ dùng, accessibility tốt, theme được bằng CSS Variables, code tối giản, không kéo dependency ngoài.
 
 ---
 
-## 1. Bối cảnh dự án
+## 1. Mục tiêu
 
-Dự án là UI Component Library dùng Angular v21.
-
-Quy tắc nền bắt buộc:
-
-- Angular v21.
-- Standalone components.
-- TypeScript strict mode.
-- SCSS.
-- CSS Variables cho theme.
-- Selector public dùng prefix `t-`.
-- Ưu tiên Angular built-in trước.
-- Ưu tiên Angular CDK nếu cần nền tảng phức tạp.
-- Không dùng PrimeNG.
-- Không dùng Angular Material/Bootstrap/Ant Design làm nền.
-- Không thêm dependency ngoài nếu chưa thật sự cần.
-- Code tối giản, dễ đọc, dễ bảo trì.
-- Không over-engineer.
-- Không tạo helper/service/token/abstraction nếu chưa thật sự cần.
-
-Component cần tạo:
+`TButton` dùng cho hành động của người dùng:
 
 ```html
-<t-button>Save</t-button>
+<t-button>Lưu</t-button>
+<t-button variant="danger">Xóa</t-button>
+<t-button loading>Đang lưu</t-button>
 ```
 
-Class:
+Không dùng `TButton` cho navigation. Nếu cần navigation thật, sau này làm `t-link` hoặc anchor directive riêng.
+
+---
+
+## 2. File structure
+
+Bắt buộc:
+
+```txt
+projects/ui/src/lib/components/button/
+  button.component.ts
+  button.component.html
+  button.component.scss
+  button.component.spec.ts
+  button.types.ts
+  button-icon.directive.ts
+```
+
+Không dùng:
+
+```txt
+button.ts
+button.html
+button.scss
+```
+
+---
+
+## 3. Public API export
+
+Trong `projects/ui/src/public-api.ts`:
 
 ```ts
-export class TButton {}
+export * from './lib/components/button/button.component';
+export * from './lib/components/button/button-icon.directive';
+export * from './lib/components/button/button.types';
 ```
 
-Selector:
+Không export file demo.
+
+---
+
+## 4. Public types
 
 ```ts
-selector: 't-button'
-```
-
----
-
-## 2. Mục tiêu của TButton
-
-`TButton` là button nền tảng của UI Library.
-
-Mục tiêu:
-
-- Dễ dùng như các UI library phổ biến.
-- API ngắn, rõ, không rườm rà.
-- Dùng được trong form, dashboard, admin, portal.
-- Hỗ trợ các trạng thái phổ biến: variant, severity, size, disabled, loading, icon.
-- Có accessibility cơ bản tốt.
-- Có theme bằng CSS Variables.
-- Dễ mở rộng sau này nhưng không tạo complexity sớm.
-
-Không làm ở phiên bản đầu:
-
-- Không làm directive kiểu `tButton` nếu chưa cần.
-- Không làm ButtonGroup nếu chưa được yêu cầu.
-- Không làm Ripple nếu chưa có directive chung.
-- Không làm global config/token.
-- Không làm pass-through API phức tạp kiểu PrimeNG `pt`.
-- Không làm unstyled mode nếu chưa có hệ thống theme ổn định.
-- Không thêm thư viện icon ngoài.
-
----
-
-## 3. Bài học tham khảo từ PrimeNG Button
-
-PrimeNG Button có các nhóm feature đáng học:
-
-- Basic button.
-- Icon button.
-- Loading state.
-- Severity/color intent.
-- Raised/elevated style.
-- Rounded/pill style.
-- Text button.
-- Outlined button.
-- Link-style button.
-- Icon-only button.
-- Badge.
-- Size small/normal/large.
-- Accessibility bằng native button.
-
-Áp dụng cho `TButton` theo hướng tối giản hơn:
-
-- Giữ API cần thiết.
-- Không bê toàn bộ props của PrimeNG.
-- Không dùng class/selector/tokens của PrimeNG.
-- Không support mọi case ngay từ đầu.
-- Chỉ ưu tiên case dùng thật nhiều.
-
----
-
-## 4. API public đề xuất
-
-### 4.1. Cách dùng cơ bản
-
-```html
-<t-button>Save</t-button>
-```
-
-```html
-<t-button variant="primary">Save</t-button>
-<t-button variant="secondary">Cancel</t-button>
-<t-button variant="danger">Delete</t-button>
-```
-
-```html
-<t-button size="sm">Small</t-button>
-<t-button>Default</t-button>
-<t-button size="lg">Large</t-button>
-```
-
-```html
-<t-button [loading]="saving">Save</t-button>
-<t-button [disabled]="form.invalid">Submit</t-button>
-```
-
-```html
-<t-button icon="save">Save</t-button>
-<t-button icon="search" ariaLabel="Search" />
-```
-
----
-
-## 5. Inputs
-
-Chỉ tạo các input dưới đây ở bản đầu.
-
-| Input | Type | Default | Mục đích |
-|---|---|---:|---|
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. Không default `submit` để tránh submit form ngoài ý muốn. |
-| `variant` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'ghost' \| 'outline' \| 'text' \| 'link'` | `'primary'` | Kiểu hiển thị/chủ đích của button. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Kích thước button. |
-| `disabled` | `boolean` | `false` | Disable button. |
-| `loading` | `boolean` | `false` | Trạng thái đang xử lý. Khi loading thì button nên disabled. |
-| `fluid` | `boolean` | `false` | Full width container. |
-| `rounded` | `boolean` | `false` | Bo tròn kiểu pill. |
-| `raised` | `boolean` | `false` | Có shadow/elevation nhẹ. |
-| `icon` | `string \| undefined` | `undefined` | Tên icon nội bộ đơn giản hoặc text key. Không bắt buộc có icon system ngay. |
-| `iconPosition` | `'left' \| 'right'` | `'left'` | Vị trí icon khi có label. |
-| `iconOnly` | `boolean` | `false` | Button chỉ có icon, dạng square. |
-| `ariaLabel` | `string \| undefined` | `undefined` | Label cho screen reader, bắt buộc khi icon-only không có text. |
-| `tabIndex` | `number \| undefined` | `undefined` | Native tabindex nếu cần. |
-
-### Lưu ý API
-
-- Dùng `variant`, không dùng `severity`, để dễ hiểu hơn cho library riêng.
-- Không tạo cả `outlined`, `text`, `link` boolean vì dễ conflict. Gộp vào `variant`.
-- Không tạo `styleClass` nếu Angular đã có `class` binding từ host usage.
-- Không tạo `style` input riêng nếu native `[style]`/CSS variable/class đã xử lý được.
-- Không tạo `badge` ở version đầu. Badge nên là component riêng sau này nếu cần.
-- Không tạo `plain`, `dt`, `pt`, `ptOptions`, `unstyled` ở version đầu.
-
----
-
-## 6. Outputs
-
-Không cần tạo output riêng cho click/focus/blur ở bản đầu.
-
-Lý do:
-
-- `t-button` render native `<button>` bên trong component, nhưng event native từ host không tự giống button thật.
-- Nếu cần support `(clicked)`, chỉ tạo 1 output duy nhất.
-- Tuy nhiên nên ưu tiên API Angular đơn giản.
-
-Đề xuất bản đầu:
-
-```ts
-clicked = output<MouseEvent>();
-```
-
-Usage:
-
-```html
-<t-button (clicked)="save()">Save</t-button>
-```
-
-Quy tắc:
-
-- Khi `disabled` hoặc `loading`, không emit `clicked`.
-- Không tạo `onClick`, `onFocus`, `onBlur` kiểu PrimeNG vì không hợp convention Angular hiện đại.
-- Nếu sau này thật sự cần focus/blur, dùng native method hoặc thêm output sau.
-
----
-
-## 7. Component API TypeScript
-
-Nên dùng Angular signal-style API nếu project đang dùng.
-
-Ví dụ type đề xuất:
-
-```ts
-export type TButtonType = 'button' | 'submit' | 'reset';
-export type TButtonSize = 'sm' | 'md' | 'lg';
 export type TButtonVariant =
   | 'primary'
   | 'secondary'
@@ -209,46 +68,435 @@ export type TButtonVariant =
   | 'info'
   | 'warning'
   | 'danger'
-  | 'ghost'
   | 'outline'
+  | 'ghost'
   | 'text'
   | 'link';
+
+export type TButtonSize = 'sm' | 'md' | 'lg';
+
+export type TButtonType = 'button' | 'submit' | 'reset';
+
 export type TButtonIconPosition = 'left' | 'right';
+
 ```
 
-Component skeleton:
+---
+
+## 5. Public API
+
+Inputs:
 
 ```ts
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+variant = input<TButtonVariant>('primary');
+size = input<TButtonSize>('md');
+type = input<TButtonType>('button');
+disabled = input(false, { transform: booleanAttribute });
+loading = input(false, { transform: booleanAttribute });
+fluid = input(false, { transform: booleanAttribute });
+rounded = input(false, { transform: booleanAttribute });
+raised = input(false, { transform: booleanAttribute });
+iconOnly = input(false, { transform: booleanAttribute });
+icon = input<string | TemplateRef<unknown> | null>(null);
+iconSrc = input<string | null>(null);
+iconPosition = input<TButtonIconPosition>('left');
+ariaLabel = input<string | null>(null);
+ariaLabelAttr = input<string | null>(null, { alias: 'aria-label' });
+tabindex = input<number | null, unknown>(null, {
+  transform: (value) => (value == null ? null : numberAttribute(value)),
+});
+```
+
+Output:
+
+```ts
+clicked = output<MouseEvent>();
+```
+
+Không thêm trong version này:
+
+- `tooltip`
+- `routerLink`
+- `badge`
+- `severity`
+- `style`
+- `styleClass`
+- `pt`
+- `dt`
+- `unstyled`
+- icon registry
+- icon service
+- button group
+- split button
+- ripple
+
+---
+
+## 6. Behavior
+
+`TButton` phải:
+
+- Render native `<button>`.
+- Default `type="button"`.
+- Support `type="button" | "submit" | "reset"`.
+- Khi `disabled` hoặc `loading`, native button phải disabled.
+- Khi `disabled` hoặc `loading`, không emit `clicked`.
+- Khi loading, set `aria-busy="true"`.
+- Khi không loading, không có `aria-busy`.
+- `iconOnly` phải có accessible name qua `aria-label` hoặc `ariaLabel`.
+- `aria-label` ưu tiên hơn `ariaLabel` nếu truyền cả hai.
+- `variant="link"` vẫn là button action, không phải navigation link.
+
+---
+
+## 7. Icon behavior
+
+Hỗ trợ 4 kiểu icon:
+
+### 7.1 Text icon
+
+```html
+<t-button icon="+">Create</t-button>
+<t-button icon=">" iconPosition="right">Next</t-button>
+```
+
+### 7.2 Image/SVG icon qua `iconSrc`
+
+```html
+<t-button iconSrc="assets/icons/save.svg">Save</t-button>
+<t-button iconSrc="assets/images/avatar.png">Avatar</t-button>
+```
+
+`iconSrc` render bằng `<img>`, có `alt=""` và `aria-hidden="true"`.
+
+### 7.3 TemplateRef icon
+
+```html
+<ng-template #viewIcon>
+  <app-view-icon />
+</ng-template>
+
+<t-button [icon]="viewIcon">View</t-button>
+<t-button [icon]="viewIcon" iconPosition="right">View</t-button>
+```
+
+### 7.4 Projected icon qua directive
+
+```html
+<t-button>
+  <app-view-icon tButtonIcon />
+  View
+</t-button>
+
+<t-button iconPosition="right">
+  <app-view-icon tButtonIcon />
+  View
+</t-button>
+```
+
+Priority khi truyền nhiều nguồn icon:
+
+1. Projected icon qua `tButtonIcon`.
+2. `iconSrc`.
+3. `TemplateRef`.
+4. Text icon.
+
+Nếu dev mode và truyền nhiều nguồn icon cùng lúc thì warning.
+
+---
+
+## 8. Accessibility
+
+Bắt buộc:
+
+- Native button dùng `[disabled]` thật.
+- `iconOnly` phải có `aria-label` hoặc `ariaLabel`.
+- `aria-label` bind xuống native `<button>`.
+- Loading có `aria-busy="true"`.
+- Icon/spinner decorative dùng `aria-hidden="true"`.
+- Image icon dùng `alt=""`.
+- Focus-visible rõ.
+- Không đặt `<ng-content>` trong `@if/@else/@for/@switch`; nếu cần ẩn thì ẩn wrapper bằng `[hidden]` hoặc class.
+
+---
+
+## 9. Style standard
+
+Bắt buộc:
+
+- SCSS scoped theo component.
+- CSS class dùng prefix `t-button`.
+- BEM nhẹ: `.t-button__icon`, `.t-button--primary`.
+- Dùng CSS Variables.
+- Có focus ring qua `--t-button-ring`.
+- Variant intent override ring riêng: secondary/success/info/warning/danger.
+- Có `box-sizing: border-box`.
+- Label có `min-width: 0`.
+- Có `prefers-reduced-motion` nếu dùng spinner animation/transition.
+- Icon-only width bằng size button.
+- Fluid host và button full width.
+
+---
+
+## 10. Demo requirements
+
+Demo page riêng:
+
+```txt
+projects/demo/src/app/pages/button-demo/
+  button-demo.component.ts
+  button-demo.component.html
+  button-demo.component.scss
+```
+
+Demo tối thiểu phải có section:
+
+- Basic.
+- Variants.
+- Sizes.
+- Loading / Disabled.
+- Icons.
+- Template icon.
+- Custom projected icon.
+- Icon only.
+- Rounded / Raised.
+- Fluid.
+
+`variant="link"` demo phải dùng action text, ví dụ:
+
+```html
+<t-button variant="link">Reset filter</t-button>
+```
+
+Không dùng text navigation kiểu `Go to profile`.
+
+---
+
+## 11. Test requirements
+
+`button.component.spec.ts` phải test tối thiểu:
+
+- Component tạo được.
+- Render projected content.
+- Default type là `button`.
+- `type="submit"` và `type="reset"` bind đúng nếu có test thêm.
+- Apply variant class.
+- Apply size class.
+- Disabled true thì native button disabled.
+- Loading true thì native button disabled và `aria-busy="true"`.
+- Không loading thì không có `aria-busy`.
+- Emit `clicked` khi enabled.
+- Không emit khi disabled.
+- Không emit khi loading.
+- `ariaLabel` compatibility input hoạt động.
+- Host `aria-label` bind xuống native button.
+- `aria-label` ưu tiên hơn `ariaLabel`.
+- Warning khi icon-only thiếu accessible label.
+- `iconSrc` render `<img>` đúng.
+- Text icon render đúng.
+- `iconPosition="right"` hoạt động.
+- TemplateRef icon render đúng.
+- Projected icon render đúng.
+- Priority icon đúng.
+- Không render duplicate icon.
+- Icon-only không hiện label.
+- Loading hiện spinner và ẩn icon.
+
+---
+
+## 12. Không được làm
+
+Không được:
+
+- Không thêm tooltip vào button.
+- Không thêm PrimeNG/CDK Overlay vào button.
+- Không biến `variant="link"` thành router/navigation.
+- Không thêm service/helper/abstraction không cần.
+- Không auto detect projected text để tự suy ra `iconOnly` nếu làm code phức tạp.
+- Không dùng icon class heuristic kiểu `icon.includes(' ') || icon.includes('-')`.
+- Không tạo `button.ts` thay cho `button.component.ts`.
+
+---
+
+## 13. Acceptance checklist
+
+- [ ] `TButton` standalone.
+- [ ] Selector là `t-button`.
+- [ ] `ChangeDetectionStrategy.OnPush`.
+- [ ] File name đúng suffix Angular.
+- [ ] Render native `<button>`.
+- [ ] Default type là `button`.
+- [ ] Disabled/loading disable native button.
+- [ ] Disabled/loading không emit `clicked`.
+- [ ] `aria-label` hoạt động.
+- [ ] `ariaLabel` compatibility còn chạy nếu giữ.
+- [ ] Icon-only thiếu label có warning dev mode.
+- [ ] Text icon hoạt động.
+- [ ] `iconSrc` hỗ trợ SVG/PNG/JPG/ảnh bất kỳ.
+- [ ] TemplateRef icon hoạt động.
+- [ ] Projected icon qua `tButtonIcon` hoạt động.
+- [ ] `iconPosition="right"` hoạt động với mọi kiểu icon.
+- [ ] Không render trùng icon.
+- [ ] Không có `<ng-content>` trong control-flow block.
+- [ ] Focus ring dùng `--t-button-ring`.
+- [ ] Variant intent có ring riêng.
+- [ ] Có reduced motion.
+- [ ] Có unit test.
+- [ ] Export public API đúng.
+- [ ] Demo page riêng.
+- [ ] `ng build ui` pass.
+- [ ] Tests pass.
+
+---
+
+# 14. Reference implementation
+
+## 14.1 `button.types.ts`
+
+```ts
+export type TButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'danger'
+  | 'outline'
+  | 'ghost'
+  | 'text'
+  | 'link';
+
+export type TButtonSize = 'sm' | 'md' | 'lg';
+
+export type TButtonType = 'button' | 'submit' | 'reset';
+
+export type TButtonIconPosition = 'left' | 'right';
+
+```
+
+## 14.2 `button-icon.directive.ts`
+
+```ts
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[tButtonIcon]',
+  standalone: true,
+  host: {
+    class: 't-button__custom-icon',
+    'aria-hidden': 'true',
+    '[style.display]': '"inline-flex"',
+    '[style.width]': '"var(--t-button-icon-size, 1em)"',
+    '[style.height]': '"var(--t-button-icon-size, 1em)"',
+    '[style.flex]': '"0 0 auto"',
+  },
+})
+export class TButtonIcon {}
+
+```
+
+## 14.3 `button.component.ts`
+
+```ts
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  contentChild,
+  computed,
+  effect,
+  input,
+  isDevMode,
+  numberAttribute,
+  output,
+  type TemplateRef,
+} from '@angular/core';
+
+import { TButtonIcon } from './button-icon.directive';
+import { TButtonIconPosition, TButtonSize, TButtonType, TButtonVariant } from './button.types';
 
 @Component({
   selector: 't-button',
   standalone: true,
-  templateUrl: './button.html',
-  styleUrl: './button.scss',
+  imports: [NgTemplateOutlet],
+  templateUrl: './button.component.html',
+  styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.t-button-host-fluid]': 'fluid()',
+    '[class.t-button-host--fluid]': 'fluid()',
   },
 })
 export class TButton {
-  type = input<TButtonType>('button');
   variant = input<TButtonVariant>('primary');
   size = input<TButtonSize>('md');
-  disabled = input(false);
-  loading = input(false);
-  fluid = input(false);
-  rounded = input(false);
-  raised = input(false);
-  icon = input<string>();
+  type = input<TButtonType>('button');
+  disabled = input(false, { transform: booleanAttribute });
+  loading = input(false, { transform: booleanAttribute });
+  fluid = input(false, { transform: booleanAttribute });
+  rounded = input(false, { transform: booleanAttribute });
+  raised = input(false, { transform: booleanAttribute });
+  iconOnly = input(false, { transform: booleanAttribute });
+  icon = input<string | TemplateRef<unknown> | null>(null);
+  iconSrc = input<string | null>(null);
   iconPosition = input<TButtonIconPosition>('left');
-  iconOnly = input(false);
-  ariaLabel = input<string>();
-  tabIndex = input<number>();
+  ariaLabel = input<string | null>(null);
+  ariaLabelAttr = input<string | null>(null, { alias: 'aria-label' });
+  tabindex = input<number | null, unknown>(null, {
+    transform: (value) => (value == null ? null : numberAttribute(value)),
+  });
 
   clicked = output<MouseEvent>();
 
+  readonly projectedIcon = contentChild(TButtonIcon);
+
   isDisabled = computed(() => this.disabled() || this.loading());
+  hasProjectedIcon = computed(() => !!this.projectedIcon());
+  hasIconSrc = computed(() => !!this.iconSrc());
+  iconTemplate = computed(() => {
+    const icon = this.icon();
+
+    return icon && typeof icon !== 'string' ? icon : null;
+  });
+  iconText = computed(() => {
+    const icon = this.icon();
+
+    return typeof icon === 'string' && icon ? icon : null;
+  });
+  hasIconInput = computed(() => !!this.iconTemplate() || !!this.iconText());
+  hasIcon = computed(() => this.hasProjectedIcon() || this.hasIconSrc() || this.hasIconInput());
+  showIcon = computed(() => !this.loading() && this.hasIcon());
+  iconOnRight = computed(
+    () => this.showIcon() && !this.iconOnly() && this.iconPosition() === 'right',
+  );
+  accessibleLabel = computed(() => this.ariaLabelAttr() ?? this.ariaLabel());
+  iconSourceCount = computed(
+    () => Number(this.hasProjectedIcon()) + Number(this.hasIconSrc()) + Number(this.hasIconInput()),
+  );
+
+  private warnedMissingAriaLabel = false;
+  private warnedMultipleIconSources = false;
+
+  constructor() {
+    effect(() => {
+      if (
+        isDevMode() &&
+        this.iconOnly() &&
+        !this.accessibleLabel() &&
+        !this.warnedMissingAriaLabel
+      ) {
+        console.warn('TButton: iconOnly buttons should provide aria-label or ariaLabel.');
+        this.warnedMissingAriaLabel = true;
+      }
+
+      if (isDevMode() && this.iconSourceCount() > 1 && !this.warnedMultipleIconSources) {
+        console.warn(
+          'TButton: multiple icon sources provided; projected icon, iconSrc, then icon are used in priority order.',
+        );
+        this.warnedMultipleIconSources = true;
+      }
+    });
+  }
 
   onClick(event: MouseEvent): void {
     if (this.isDisabled()) {
@@ -260,214 +508,276 @@ export class TButton {
     this.clicked.emit(event);
   }
 }
+
 ```
 
-Chỉ thêm `computed` nếu thật sự dùng trong template. Không tạo helper class builder nếu template/class binding xử lý được.
-
----
-
-## 8. Template đề xuất
-
-File:
-
-```txt
-projects/ui/src/lib/components/button/button.html
-```
-
-Template nên đơn giản:
+## 14.4 `button.component.html`
 
 ```html
 <button
   class="t-button"
-  [class.t-button-primary]="variant() === 'primary'"
-  [class.t-button-secondary]="variant() === 'secondary'"
-  [class.t-button-success]="variant() === 'success'"
-  [class.t-button-info]="variant() === 'info'"
-  [class.t-button-warning]="variant() === 'warning'"
-  [class.t-button-danger]="variant() === 'danger'"
-  [class.t-button-ghost]="variant() === 'ghost'"
-  [class.t-button-outline]="variant() === 'outline'"
-  [class.t-button-text]="variant() === 'text'"
-  [class.t-button-link]="variant() === 'link'"
-  [class.t-button-sm]="size() === 'sm'"
-  [class.t-button-md]="size() === 'md'"
-  [class.t-button-lg]="size() === 'lg'"
-  [class.t-button-fluid]="fluid()"
-  [class.t-button-rounded]="rounded()"
-  [class.t-button-raised]="raised()"
-  [class.t-button-icon-only]="iconOnly()"
-  [class.t-button-loading]="loading()"
+  [class.t-button--primary]="variant() === 'primary'"
+  [class.t-button--secondary]="variant() === 'secondary'"
+  [class.t-button--success]="variant() === 'success'"
+  [class.t-button--info]="variant() === 'info'"
+  [class.t-button--warning]="variant() === 'warning'"
+  [class.t-button--danger]="variant() === 'danger'"
+  [class.t-button--outline]="variant() === 'outline'"
+  [class.t-button--ghost]="variant() === 'ghost'"
+  [class.t-button--text]="variant() === 'text'"
+  [class.t-button--link]="variant() === 'link'"
+  [class.t-button--sm]="size() === 'sm'"
+  [class.t-button--md]="size() === 'md'"
+  [class.t-button--lg]="size() === 'lg'"
+  [class.t-button--fluid]="fluid()"
+  [class.t-button--rounded]="rounded()"
+  [class.t-button--raised]="raised()"
+  [class.t-button--icon-only]="iconOnly()"
+  [class.t-button--loading]="loading()"
+  [class.t-button--icon-right]="iconOnRight()"
   [type]="type()"
   [disabled]="isDisabled()"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="accessibleLabel()"
   [attr.aria-busy]="loading() ? 'true' : null"
-  [attr.tabindex]="tabIndex()"
+  [attr.tabindex]="tabindex()"
   (click)="onClick($event)"
 >
-  @if (loading()) {
-    <span class="t-button-spinner" aria-hidden="true"></span>
-  } @else if (icon() && iconPosition() === 'left') {
-    <span class="t-button-icon" aria-hidden="true">{{ icon() }}</span>
-  }
+  <span class="t-button__spinner" [hidden]="!loading()" aria-hidden="true"></span>
 
-  @if (!iconOnly()) {
-    <span class="t-button-label">
-      <ng-content />
-    </span>
-  }
+  <span class="t-button__icon" [hidden]="loading() || !showIcon()" aria-hidden="true">
+    <ng-content select="[tButtonIcon]" />
 
-  @if (!loading() && icon() && iconPosition() === 'right' && !iconOnly()) {
-    <span class="t-button-icon" aria-hidden="true">{{ icon() }}</span>
-  }
+    @if (!loading() && !hasProjectedIcon()) {
+      @if (iconSrc()) {
+        <img class="t-button__icon-image" [src]="iconSrc()" alt="" aria-hidden="true" />
+      } @else if (iconTemplate(); as templateIcon) {
+        <ng-container [ngTemplateOutlet]="templateIcon" />
+      } @else if (iconText()) {
+        <span>{{ iconText() }}</span>
+      }
+    }
+  </span>
+
+  <span class="t-button__label" [hidden]="iconOnly()">
+    <ng-content />
+  </span>
 </button>
+
 ```
 
-### Lưu ý template
-
-- Dùng native `<button>` để có keyboard support mặc định.
-- Không tự xử lý Enter/Space vì native button đã hỗ trợ.
-- Spinner dùng CSS, không thêm icon dependency.
-- `icon` ở bản đầu có thể render text/key. Khi có icon component riêng, thay sau.
-- Nếu `iconOnly=true`, user phải truyền `ariaLabel`.
-- Không dùng `ngClass` nếu class binding trực tiếp đủ rõ.
-
----
-
-## 9. Style đề xuất
-
-File:
-
-```txt
-projects/ui/src/lib/components/button/button.scss
-```
-
-Style phải dùng CSS Variables.
+## 14.5 `button.component.scss`
 
 ```scss
 :host {
   display: inline-flex;
 }
 
-:host(.t-button-host-fluid) {
+:host(.t-button-host--fluid) {
   display: flex;
   width: 100%;
 }
 
 .t-button {
   --t-button-bg: var(--t-primary, #2563eb);
-  --t-button-color: #ffffff;
+  --t-button-color: var(--t-primary-contrast, #ffffff);
   --t-button-border: var(--t-button-bg);
-  --t-button-hover-bg: #1d4ed8;
-  --t-button-hover-border: var(--t-button-hover-bg);
+  --t-button-hover-bg: var(--t-primary-hover, #1d4ed8);
+  --t-button-icon-size: 1rem;
+  --t-button-ring: var(--t-primary-ring, rgba(37, 99, 235, 0.35));
+  --t-button-size: 2.5rem;
 
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: auto;
+  height: var(--t-button-size);
+  padding: 0 1rem;
   border: 1px solid var(--t-button-border);
-  border-radius: var(--t-button-radius, var(--t-radius, 0.75rem));
+  border-radius: var(--t-button-radius, 0.625rem);
   background: var(--t-button-bg);
   color: var(--t-button-color);
-  font: inherit;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
-  text-decoration: none;
   transition:
-    background var(--t-transition, 150ms ease),
-    border-color var(--t-transition, 150ms ease),
-    color var(--t-transition, 150ms ease),
+    background-color var(--t-transition, 150ms ease),
     box-shadow var(--t-transition, 150ms ease),
     transform var(--t-transition, 150ms ease);
 }
 
 .t-button:hover:not(:disabled) {
   background: var(--t-button-hover-bg);
-  border-color: var(--t-button-hover-border);
+  border-color: var(--t-button-hover-border, var(--t-button-hover-bg));
 }
 
 .t-button:focus-visible {
-  outline: 2px solid var(--t-button-focus-ring, color-mix(in srgb, var(--t-button-bg), white 55%));
-  outline-offset: 2px;
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--t-surface, #ffffff),
+    0 0 0 4px var(--t-button-ring);
 }
 
 .t-button:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.99);
 }
 
 .t-button:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.55;
+  box-shadow: none;
   transform: none;
 }
 
-.t-button-sm {
-  min-height: 2rem;
+.t-button--sm {
+  --t-button-size: 2rem;
+
   padding: 0 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.t-button--md {
+  --t-button-size: 2.5rem;
+
+  padding: 0 1rem;
   font-size: 0.875rem;
 }
 
-.t-button-md {
-  min-height: 2.5rem;
-  padding: 0 1rem;
+.t-button--lg {
+  --t-button-size: 3rem;
+
+  padding: 0 1.25rem;
   font-size: 0.9375rem;
 }
 
-.t-button-lg {
-  min-height: 3rem;
-  padding: 0 1.25rem;
-  font-size: 1rem;
-}
-
-.t-button-fluid {
+.t-button--fluid {
   width: 100%;
 }
 
-.t-button-rounded {
+.t-button--rounded {
   border-radius: 999px;
 }
 
-.t-button-raised {
-  box-shadow: var(--t-button-shadow, var(--t-shadow, 0 10px 25px rgba(15, 23, 42, 0.08)));
+.t-button--raised:not(:disabled) {
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
 }
 
-.t-button-icon-only {
-  aspect-ratio: 1;
+.t-button--raised:hover:not(:disabled) {
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+}
+
+.t-button--icon-only {
+  width: var(--t-button-size);
   padding: 0;
 }
 
-.t-button-icon-only.t-button-sm {
-  width: 2rem;
+.t-button--icon-right .t-button__icon {
+  order: 2;
 }
 
-.t-button-icon-only.t-button-md {
-  width: 2.5rem;
+.t-button__spinner[hidden],
+.t-button__icon[hidden],
+.t-button__label[hidden] {
+  display: none;
 }
 
-.t-button-icon-only.t-button-lg {
-  width: 3rem;
-}
-
-.t-button-icon,
-.t-button-spinner {
+.t-button__icon {
+  display: inline-flex;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--t-button-icon-size);
+  height: var(--t-button-icon-size);
 }
 
-.t-button-label {
+.t-button__icon-image,
+.t-button__icon svg {
+  display: block;
+  width: var(--t-button-icon-size);
+  height: var(--t-button-icon-size);
+}
+
+.t-button__label {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.t-button-spinner {
-  width: 1em;
-  height: 1em;
+.t-button__spinner {
+  width: 1rem;
+  height: 1rem;
   border: 2px solid currentColor;
   border-right-color: transparent;
-  border-radius: 50%;
-  animation: t-button-spin 700ms linear infinite;
+  border-radius: 999px;
+  animation: t-button-spin 650ms linear infinite;
+}
+
+.t-button--secondary {
+  --t-button-bg: var(--t-secondary, #64748b);
+  --t-button-hover-bg: var(--t-secondary-hover, #475569);
+  --t-button-ring: var(--t-secondary-ring, rgba(100, 116, 139, 0.35));
+}
+
+.t-button--success {
+  --t-button-bg: var(--t-success, #16a34a);
+  --t-button-hover-bg: var(--t-success-hover, #15803d);
+  --t-button-ring: var(--t-success-ring, rgba(22, 163, 74, 0.35));
+}
+
+.t-button--info {
+  --t-button-bg: var(--t-info, #0284c7);
+  --t-button-hover-bg: var(--t-info-hover, #0369a1);
+  --t-button-ring: var(--t-info-ring, rgba(2, 132, 199, 0.35));
+}
+
+.t-button--warning {
+  --t-button-bg: var(--t-warning, #d97706);
+  --t-button-hover-bg: var(--t-warning-hover, #b45309);
+  --t-button-ring: var(--t-warning-ring, rgba(217, 119, 6, 0.35));
+}
+
+.t-button--danger {
+  --t-button-bg: var(--t-danger, #dc2626);
+  --t-button-hover-bg: var(--t-danger-hover, #b91c1c);
+  --t-button-ring: var(--t-danger-ring, rgba(220, 38, 38, 0.35));
+}
+
+.t-button--outline {
+  --t-button-bg: transparent;
+  --t-button-color: var(--t-text, #111827);
+  --t-button-border: var(--t-border, #d1d5db);
+  --t-button-hover-bg: var(--t-muted-surface, #f8fafc);
+  --t-button-hover-border: var(--t-border-strong, #cbd5e1);
+}
+
+.t-button--ghost {
+  --t-button-bg: transparent;
+  --t-button-color: var(--t-text, #111827);
+  --t-button-border: transparent;
+  --t-button-hover-bg: var(--t-muted-surface, #f1f5f9);
+}
+
+.t-button--text,
+.t-button--link {
+  --t-button-bg: transparent;
+  --t-button-color: var(--t-primary, #2563eb);
+  --t-button-border: transparent;
+  --t-button-hover-bg: transparent;
+  --t-button-hover-border: transparent;
+}
+
+.t-button--text:hover:not(:disabled) {
+  color: var(--t-primary-hover, #1d4ed8);
+}
+
+.t-button--link {
+  height: auto;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 @keyframes t-button-spin {
@@ -475,408 +785,430 @@ Style phải dùng CSS Variables.
     transform: rotate(360deg);
   }
 }
-```
 
-Variant styles:
+@media (prefers-reduced-motion: reduce) {
+  .t-button {
+    transition: none;
+  }
 
-```scss
-.t-button-primary {
-  --t-button-bg: var(--t-primary, #2563eb);
-  --t-button-hover-bg: var(--t-primary-hover, #1d4ed8);
-}
-
-.t-button-secondary {
-  --t-button-bg: var(--t-secondary, #64748b);
-  --t-button-hover-bg: var(--t-secondary-hover, #475569);
-}
-
-.t-button-success {
-  --t-button-bg: var(--t-success, #16a34a);
-  --t-button-hover-bg: var(--t-success-hover, #15803d);
-}
-
-.t-button-info {
-  --t-button-bg: var(--t-info, #0284c7);
-  --t-button-hover-bg: var(--t-info-hover, #0369a1);
-}
-
-.t-button-warning {
-  --t-button-bg: var(--t-warning, #d97706);
-  --t-button-hover-bg: var(--t-warning-hover, #b45309);
-}
-
-.t-button-danger {
-  --t-button-bg: var(--t-danger, #dc2626);
-  --t-button-hover-bg: var(--t-danger-hover, #b91c1c);
-}
-
-.t-button-ghost {
-  --t-button-bg: transparent;
-  --t-button-color: var(--t-text, #111827);
-  --t-button-border: transparent;
-  --t-button-hover-bg: var(--t-muted-surface, #f1f5f9);
-  --t-button-hover-border: transparent;
-}
-
-.t-button-outline {
-  --t-button-bg: transparent;
-  --t-button-color: var(--t-primary, #2563eb);
-  --t-button-border: currentColor;
-  --t-button-hover-bg: color-mix(in srgb, var(--t-primary, #2563eb), transparent 90%);
-  --t-button-hover-border: currentColor;
-}
-
-.t-button-text,
-.t-button-link {
-  --t-button-bg: transparent;
-  --t-button-color: var(--t-primary, #2563eb);
-  --t-button-border: transparent;
-  --t-button-hover-bg: color-mix(in srgb, var(--t-primary, #2563eb), transparent 92%);
-  --t-button-hover-border: transparent;
-}
-
-.t-button-link {
-  min-height: auto;
-  padding-inline: 0;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  .t-button__spinner {
+    animation: none;
+  }
 }
 ```
 
-### Lưu ý style
-
-- Có thể dùng `color-mix()` nếu project chấp nhận browser support hiện đại.
-- Nếu không muốn `color-mix()`, thay bằng CSS variables riêng như `--t-primary-soft`.
-- Không hardcode quá nhiều màu; fallback chỉ để component hoạt động khi theme chưa khai báo đủ.
-- Không tạo design token quá sâu ngay từ đầu.
-
----
-
-## 10. Theme variables nên bổ sung
-
-File có thể là:
-
-```txt
-projects/ui/src/lib/styles/theme.scss
-```
-
-Hoặc file theme hiện có của project.
-
-```scss
-:root {
-  --t-primary: #2563eb;
-  --t-primary-hover: #1d4ed8;
-  --t-secondary: #64748b;
-  --t-secondary-hover: #475569;
-  --t-success: #16a34a;
-  --t-success-hover: #15803d;
-  --t-info: #0284c7;
-  --t-info-hover: #0369a1;
-  --t-warning: #d97706;
-  --t-warning-hover: #b45309;
-  --t-danger: #dc2626;
-  --t-danger-hover: #b91c1c;
-  --t-surface: #ffffff;
-  --t-muted-surface: #f1f5f9;
-  --t-text: #111827;
-  --t-muted-text: #6b7280;
-  --t-border: #e5e7eb;
-  --t-radius: 0.75rem;
-  --t-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-  --t-transition: 150ms ease;
-}
-```
-
-Chỉ thêm biến chưa có. Nếu project đã có biến tương tự, tận dụng biến cũ.
-
----
-
-## 11. Accessibility
-
-`TButton` phải đạt mức cơ bản:
-
-- Render native `<button>`.
-- Native button tự hỗ trợ `Tab`, `Enter`, `Space`.
-- Set `[disabled]` thật trên button.
-- Khi loading, set `aria-busy="true"`.
-- Spinner/icon phải có `aria-hidden="true"`.
-- Icon-only button phải có `ariaLabel`.
-- Không dùng `div role="button"`.
-- Không tự override keyboard event nếu không cần.
-
-Rule kiểm tra:
-
-```html
-<t-button icon="search" iconOnly ariaLabel="Search" />
-```
-
-Không nên:
-
-```html
-<t-button icon="search" iconOnly />
-```
-
-Nếu muốn chặt hơn, có thể cảnh báo trong dev bằng console warning, nhưng **không thêm logic này ở bản đầu** nếu chưa cần.
-
----
-
-## 12. Demo app tối thiểu
-
-Demo chỉ để test component, không biến thành app phức tạp.
-
-File ví dụ:
-
-```txt
-projects/demo/src/app/button-demo.component.ts
-```
-
-Demo nên có:
-
-```html
-<section class="demo-section">
-  <h2>Button</h2>
-
-  <div class="demo-row">
-    <t-button>Primary</t-button>
-    <t-button variant="secondary">Secondary</t-button>
-    <t-button variant="success">Success</t-button>
-    <t-button variant="info">Info</t-button>
-    <t-button variant="warning">Warning</t-button>
-    <t-button variant="danger">Danger</t-button>
-  </div>
-
-  <div class="demo-row">
-    <t-button variant="outline">Outline</t-button>
-    <t-button variant="ghost">Ghost</t-button>
-    <t-button variant="text">Text</t-button>
-    <t-button variant="link">Link</t-button>
-  </div>
-
-  <div class="demo-row">
-    <t-button size="sm">Small</t-button>
-    <t-button size="md">Medium</t-button>
-    <t-button size="lg">Large</t-button>
-  </div>
-
-  <div class="demo-row">
-    <t-button icon="←">Back</t-button>
-    <t-button icon="→" iconPosition="right">Next</t-button>
-    <t-button icon="🔍" iconOnly ariaLabel="Search" />
-    <t-button loading>Saving</t-button>
-    <t-button disabled>Disabled</t-button>
-  </div>
-
-  <div class="demo-row demo-fluid">
-    <t-button fluid>Full width</t-button>
-  </div>
-</section>
-```
-
-Demo styles tối thiểu:
-
-```scss
-.demo-section {
-  display: grid;
-  gap: 1rem;
-}
-
-.demo-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.demo-fluid {
-  max-width: 24rem;
-}
-```
-
----
-
-## 13. Public API
-
-Phải export component qua:
-
-```txt
-projects/ui/src/public-api.ts
-```
-
-Ví dụ:
+## 14.6 `button.component.spec.ts`
 
 ```ts
-export * from './lib/components/button/button';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
+
+import { TButtonIcon } from './button-icon.directive';
+import { TButton } from './button.component';
+
+@Component({
+  standalone: true,
+  imports: [TButton, TButtonIcon],
+  template: `
+    <t-button>
+      <svg tButtonIcon viewBox="0 0 24 24"></svg>
+      Save
+    </t-button>
+  `,
+})
+class TButtonHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton],
+  template: `<t-button iconOnly aria-label="Create" icon="+"></t-button>`,
+})
+class TButtonAriaLabelHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton],
+  template: `<t-button iconOnly aria-label="Native" ariaLabel="Compat" icon="+"></t-button>`,
+})
+class TButtonAriaLabelPriorityHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton, TButtonIcon],
+  template: `
+    <t-button iconPosition="right">
+      <svg tButtonIcon viewBox="0 0 24 24"></svg>
+      View
+    </t-button>
+  `,
+})
+class TButtonProjectedRightHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton],
+  template: `
+    <ng-template #viewIcon>
+      <span class="template-icon">view</span>
+    </ng-template>
+
+    <t-button [icon]="viewIcon" iconPosition="right">View</t-button>
+  `,
+})
+class TButtonTemplateIconHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton],
+  template: `
+    <ng-template #viewIcon>
+      <span class="template-icon">view</span>
+    </ng-template>
+
+    <t-button [icon]="viewIcon" iconSrc="assets/icons/save.svg">Save</t-button>
+  `,
+})
+class TButtonIconSrcPriorityHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton, TButtonIcon],
+  template: `
+    <t-button icon="+" iconSrc="assets/icons/save.svg">
+      <svg tButtonIcon viewBox="0 0 24 24"></svg>
+      Save
+    </t-button>
+  `,
+})
+class TButtonProjectedPriorityHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton, TButtonIcon],
+  template: `
+    <t-button loading>
+      <svg tButtonIcon viewBox="0 0 24 24"></svg>
+      Saving
+    </t-button>
+  `,
+})
+class TButtonProjectedLoadingHost {}
+
+@Component({
+  standalone: true,
+  imports: [TButton],
+  template: `<t-button iconOnly aria-label="Save" icon="+">Hidden label</t-button>`,
+})
+class TButtonIconOnlyLabelHost {}
+
+describe('TButton', () => {
+  let component: TButton;
+  let fixture: ComponentFixture<TButton>;
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        TButton,
+        TButtonHost,
+        TButtonAriaLabelHost,
+        TButtonAriaLabelPriorityHost,
+        TButtonProjectedRightHost,
+        TButtonTemplateIconHost,
+        TButtonIconSrcPriorityHost,
+        TButtonProjectedPriorityHost,
+        TButtonProjectedLoadingHost,
+        TButtonIconOnlyLabelHost,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TButton);
+    component = fixture.componentInstance;
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should render projected content', () => {
+    const hostFixture = TestBed.createComponent(TButtonHost);
+    hostFixture.detectChanges();
+
+    const label = hostFixture.nativeElement.querySelector('.t-button__label') as HTMLElement;
+    const icon = hostFixture.nativeElement.querySelector('[tButtonIcon]') as SVGElement;
+
+    expect(label.textContent).toContain('Save');
+    expect(label.querySelector('[tButtonIcon]')).toBeFalsy();
+    expect(icon.classList.contains('t-button__custom-icon')).toBe(true);
+  });
+
+  it('should use button as default type', () => {
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.type).toBe('button');
+  });
+
+  it('should bind submit type to the native button', () => {
+    fixture.componentRef.setInput('type', 'submit');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.type).toBe('submit');
+  });
+
+  it('should apply variant class', () => {
+    fixture.componentRef.setInput('variant', 'danger');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.classList.contains('t-button--danger')).toBe(true);
+  });
+
+  it('should apply size class', () => {
+    fixture.componentRef.setInput('size', 'lg');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.classList.contains('t-button--lg')).toBe(true);
+  });
+
+  it('should disable when disabled is true', () => {
+    fixture.componentRef.setInput('disabled', true);
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.disabled).toBe(true);
+  });
+
+  it('should disable when loading is true', () => {
+    fixture.componentRef.setInput('loading', true);
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.disabled).toBe(true);
+    expect(button.getAttribute('aria-busy')).toBe('true');
+  });
+
+  it('should not set aria-busy when loading is false', () => {
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.getAttribute('aria-busy')).toBeNull();
+  });
+
+  it('should emit clicked when enabled', () => {
+    const clicks: MouseEvent[] = [];
+    component.clicked.subscribe((event) => clicks.push(event));
+
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('button').click();
+
+    expect(clicks).toHaveLength(1);
+    expect(clicks[0]).toBeInstanceOf(MouseEvent);
+  });
+
+  it('should not emit clicked when disabled', () => {
+    const clicks: MouseEvent[] = [];
+    component.clicked.subscribe((event) => clicks.push(event));
+
+    fixture.componentRef.setInput('disabled', true);
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('button').click();
+
+    expect(clicks).toHaveLength(0);
+  });
+
+  it('should not emit clicked when loading', () => {
+    const clicks: MouseEvent[] = [];
+    component.clicked.subscribe((event) => clicks.push(event));
+
+    fixture.componentRef.setInput('loading', true);
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('button').click();
+
+    expect(clicks).toHaveLength(0);
+  });
+
+  it('should set aria-label through the ariaLabel compatibility input', () => {
+    fixture.componentRef.setInput('icon', '?');
+    fixture.componentRef.setInput('iconOnly', true);
+    fixture.componentRef.setInput('ariaLabel', 'Search');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.classList.contains('t-button--icon-only')).toBe(true);
+    expect(button.getAttribute('aria-label')).toBe('Search');
+  });
+
+  it('should pass host aria-label down to native button', () => {
+    const hostFixture = TestBed.createComponent(TButtonAriaLabelHost);
+    hostFixture.detectChanges();
+
+    const button = hostFixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.getAttribute('aria-label')).toBe('Create');
+  });
+
+  it('should prefer aria-label over ariaLabel when both are provided', () => {
+    const hostFixture = TestBed.createComponent(TButtonAriaLabelPriorityHost);
+    hostFixture.detectChanges();
+
+    const button = hostFixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.getAttribute('aria-label')).toBe('Native');
+  });
+
+  it('should warn when icon-only button has no accessible label', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    fixture.componentRef.setInput('icon', '+');
+    fixture.componentRef.setInput('iconOnly', true);
+    fixture.detectChanges();
+
+    expect(warn).toHaveBeenCalledWith(
+      'TButton: iconOnly buttons should provide aria-label or ariaLabel.',
+    );
+  });
+
+  it('should render iconSrc as an image', () => {
+    fixture.componentRef.setInput('iconSrc', 'assets/icons/save.svg');
+    fixture.detectChanges();
+
+    const image = fixture.nativeElement.querySelector('.t-button__icon-image') as HTMLImageElement;
+
+    expect(image).toBeTruthy();
+    expect(image.getAttribute('src')).toBe('assets/icons/save.svg');
+    expect(image.getAttribute('alt')).toBe('');
+    expect(image.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should render text icon', () => {
+    fixture.componentRef.setInput('icon', '+');
+    fixture.detectChanges();
+
+    const icon = fixture.nativeElement.querySelector('.t-button__icon') as HTMLElement;
+
+    expect(icon.textContent).toContain('+');
+  });
+
+  it('should apply right icon position to iconSrc', () => {
+    fixture.componentRef.setInput('iconSrc', 'assets/icons/save.svg');
+    fixture.componentRef.setInput('iconPosition', 'right');
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+    expect(button.classList.contains('t-button--icon-right')).toBe(true);
+  });
+
+  it('should render TemplateRef icon and honor right icon position', () => {
+    const hostFixture = TestBed.createComponent(TButtonTemplateIconHost);
+    hostFixture.detectChanges();
+
+    const button = hostFixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    const icon = hostFixture.nativeElement.querySelector('.template-icon') as HTMLElement;
+
+    expect(icon.textContent).toContain('view');
+    expect(button.classList.contains('t-button--icon-right')).toBe(true);
+  });
+
+  it('should honor right icon position for projected icon', () => {
+    const hostFixture = TestBed.createComponent(TButtonProjectedRightHost);
+    hostFixture.detectChanges();
+
+    const button = hostFixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    const icon = hostFixture.nativeElement.querySelector('[tButtonIcon]') as SVGElement;
+
+    expect(icon).toBeTruthy();
+    expect(button.classList.contains('t-button--icon-right')).toBe(true);
+  });
+
+  it('should prioritize iconSrc over TemplateRef icon', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    const hostFixture = TestBed.createComponent(TButtonIconSrcPriorityHost);
+    hostFixture.detectChanges();
+
+    const image = hostFixture.nativeElement.querySelector(
+      '.t-button__icon-image',
+    ) as HTMLImageElement;
+    const templateIcon = hostFixture.nativeElement.querySelector('.template-icon') as HTMLElement;
+
+    expect(image).toBeTruthy();
+    expect(templateIcon).toBeFalsy();
+  });
+
+  it('should prioritize projected icon over other icon sources', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    const hostFixture = TestBed.createComponent(TButtonProjectedPriorityHost);
+    hostFixture.detectChanges();
+
+    const iconSlot = hostFixture.nativeElement.querySelector('.t-button__icon') as HTMLElement;
+    const projectedIcon = hostFixture.nativeElement.querySelector('[tButtonIcon]') as SVGElement;
+    const image = hostFixture.nativeElement.querySelector(
+      '.t-button__icon-image',
+    ) as HTMLImageElement;
+
+    expect(projectedIcon).toBeTruthy();
+    expect(image).toBeFalsy();
+    expect(iconSlot.textContent).not.toContain('+');
+    expect(warn).toHaveBeenCalledWith(
+      'TButton: multiple icon sources provided; projected icon, iconSrc, then icon are used in priority order.',
+    );
+  });
+
+  it('should not render duplicate icons when multiple icon sources are provided', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    fixture.componentRef.setInput('icon', '+');
+    fixture.componentRef.setInput('iconSrc', 'assets/icons/save.svg');
+    fixture.detectChanges();
+
+    const icons = fixture.nativeElement.querySelectorAll('.t-button__icon');
+    const image = fixture.nativeElement.querySelector('.t-button__icon-image') as HTMLImageElement;
+
+    expect(icons).toHaveLength(1);
+    expect(image).toBeTruthy();
+    expect(icons[0].textContent).not.toContain('+');
+    expect(warn).toHaveBeenCalledWith(
+      'TButton: multiple icon sources provided; projected icon, iconSrc, then icon are used in priority order.',
+    );
+  });
+
+  it('should hide projected label when iconOnly is true', () => {
+    const hostFixture = TestBed.createComponent(TButtonIconOnlyLabelHost);
+    hostFixture.detectChanges();
+
+    const label = hostFixture.nativeElement.querySelector('.t-button__label') as HTMLElement;
+
+    expect(label.hidden).toBe(true);
+    expect(label.textContent).toContain('Hidden label');
+  });
+
+  it('should show spinner and hide projected icon while loading', () => {
+    const hostFixture = TestBed.createComponent(TButtonProjectedLoadingHost);
+    hostFixture.detectChanges();
+
+    const spinner = hostFixture.nativeElement.querySelector('.t-button__spinner') as HTMLElement;
+    const icon = hostFixture.nativeElement.querySelector('.t-button__icon') as HTMLElement;
+
+    expect(spinner.hidden).toBe(false);
+    expect(icon.hidden).toBe(true);
+  });
+});
+
 ```
-
-Nếu file theo convention Angular mặc định:
-
-```ts
-export * from './lib/components/button/button.component';
-```
-
-Giữ đúng convention đang có của project. Không đổi tên file hàng loạt nếu project đã có pattern.
-
----
-
-## 14. File cần tạo/sửa
-
-Tùy cấu trúc đang có, ưu tiên ít file nhất.
-
-Khuyến nghị:
-
-```txt
-projects/ui/src/lib/components/button/button.ts
-projects/ui/src/lib/components/button/button.html
-projects/ui/src/lib/components/button/button.scss
-projects/ui/src/public-api.ts
-projects/demo/src/app/...
-```
-
-Nếu project đang dùng `.component.ts` thì dùng:
-
-```txt
-projects/ui/src/lib/components/button/button.component.ts
-projects/ui/src/lib/components/button/button.component.html
-projects/ui/src/lib/components/button/button.component.scss
-```
-
-Không tạo folder rỗng.
-Không tạo service.
-Không tạo directive.
-Không tạo token.
-Không tạo module.
-
----
-
-## 15. Hành vi cần đúng
-
-### Click
-
-- Click bình thường emit `clicked`.
-- Khi `disabled=true`, không emit.
-- Khi `loading=true`, không emit.
-
-### Loading
-
-- Hiển thị spinner.
-- Button bị disabled.
-- Set `aria-busy="true"`.
-- Không cần tạo `loadingIcon` input ở bản đầu.
-
-### Icon
-
-- Icon trái mặc định.
-- Icon phải khi `iconPosition="right"`.
-- Icon-only dùng square button.
-- Icon-only phải có `ariaLabel` ở usage.
-
-### Fluid
-
-- `fluid=true` làm button full width.
-- Host cũng nên full width để layout đúng.
-
-### Type
-
-- Default `type="button"`.
-- Cho phép `submit`, `reset`.
-
----
-
-## 16. Không làm những thứ này khi code
-
-Không được:
-
-- Import PrimeNG.
-- Import Angular Material.
-- Import thư viện icon ngoài.
-- Tạo `ButtonModule`.
-- Tạo `ButtonService`.
-- Tạo global config token.
-- Tạo pass-through API.
-- Tạo directive `tButton` nếu chưa được yêu cầu.
-- Tạo badge trong button ở version đầu.
-- Tạo quá nhiều variant chưa dùng.
-- Tự viết keyboard handling thừa cho native button.
-- Dùng `any` nếu không bắt buộc.
-- Dùng inline style hardcode trong template.
-- Đổi cấu trúc lớn của project.
-
----
-
-## 17. Checklist hoàn thành
-
-Trước khi trả code, kiểm tra:
-
-- [ ] `TButton` là standalone component.
-- [ ] Selector là `t-button`.
-- [ ] Dùng Angular v21 signal-style `input()` / `output()` nếu project đang theo hướng này.
-- [ ] Dùng native `<button>`.
-- [ ] Default `type` là `button`.
-- [ ] Có `variant`, `size`, `disabled`, `loading`, `fluid`, `rounded`, `raised`, `icon`, `iconPosition`, `iconOnly`, `ariaLabel`.
-- [ ] Loading disable click.
-- [ ] Disabled disable click.
-- [ ] Style dùng CSS Variables.
-- [ ] Không thêm dependency mới.
-- [ ] Export trong `public-api.ts`.
-- [ ] Demo app có ví dụ tối thiểu.
-- [ ] `ng build ui` pass.
-
----
-
-## 18. Prompt gợi ý cho AI code
-
-Dùng prompt này khi yêu cầu AI khác code:
-
-```md
-Hãy tạo component `TButton` cho Angular v21 UI Library theo skill dưới đây.
-
-Yêu cầu bắt buộc:
-- Standalone component.
-- Selector `t-button`.
-- Class `TButton`.
-- TypeScript strict.
-- SCSS.
-- CSS Variables.
-- Không dùng PrimeNG, Angular Material, Bootstrap hoặc UI dependency ngoài.
-- Không tạo module/service/directive/token/helper nếu chưa cần.
-- Ưu tiên code tối giản, dễ đọc, ít thay đổi nhất.
-- Nếu project đã có convention file name thì giữ convention đó.
-- Export component qua `public-api.ts`.
-- Thêm demo tối thiểu trong demo app nếu project có demo.
-
-API cần có:
-- type: 'button' | 'submit' | 'reset', default 'button'
-- variant: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'ghost' | 'outline' | 'text' | 'link', default 'primary'
-- size: 'sm' | 'md' | 'lg', default 'md'
-- disabled: boolean, default false
-- loading: boolean, default false
-- fluid: boolean, default false
-- rounded: boolean, default false
-- raised: boolean, default false
-- icon?: string
-- iconPosition: 'left' | 'right', default 'left'
-- iconOnly: boolean, default false
-- ariaLabel?: string
-- tabIndex?: number
-- clicked = output<MouseEvent>()
-
-Hành vi:
-- Render native `<button>` bên trong.
-- Khi disabled/loading thì button disabled và không emit clicked.
-- Khi loading hiển thị spinner CSS và set aria-busy.
-- Icon/spinner aria-hidden.
-- Icon-only usage phải truyền ariaLabel.
-- Không tự xử lý keyboard event vì native button đã làm.
-
-Sau khi code xong, kiểm tra build `ng build ui`.
-```
-
----
-
-## 19. Nguyên tắc cuối cùng
-
-Khi phân vân, chọn hướng:
-
-> Ít code nhất có thể, đúng nhu cầu nhất có thể, dễ mở rộng khi thật sự cần.
-
-Không vẽ vời kiến trúc. Không tạo thứ chưa dùng. Không thêm complexity chỉ vì “sau này có thể cần”.

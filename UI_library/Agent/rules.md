@@ -1,55 +1,190 @@
 # UI Library Rules - Angular v21
 
-Bộ rule này áp dụng riêng cho dự án UI Component Library dùng Angular v21, kế thừa rule chung của TRỤC.
+Rule chuẩn cho dự án UI Component Library dùng Angular v21. File này là nền tảng chung cho tất cả component sau này.
 
-## 1. Mục tiêu dự án
+Mục tiêu: xây một UI library riêng có API dễ dùng, giao diện hiện đại, accessibility tốt, dễ theme bằng CSS Variables, nhưng code tối giản và không over-engineer.
 
-Dự án này dùng để xây dựng một thư viện UI riêng, tương tự PrimeNG về cách sử dụng, nhưng không phụ thuộc PrimeNG.
+---
 
-Mục tiêu chính:
+## 1. Triết lý sản phẩm
 
-- Tạo thư viện UI dùng lại được cho nhiều dự án Angular.
-- Component đẹp, hiện đại, dễ dùng, dễ mở rộng.
-- API đơn giản, rõ ràng, không rườm rà.
-- Ưu tiên code tối giản, dễ đọc, dễ bảo trì.
-- Không copy PrimeNG, chỉ học cách tổ chức và trải nghiệm sử dụng.
-- Không thêm abstraction, helper, token, service, utility nếu chưa thật sự cần.
+Thư viện này dùng để xây component UI dùng lại cho nhiều dự án Angular.
+
+Ưu tiên:
+
+- Đẹp, hiện đại, cao cấp, gọn.
+- API ngắn, rõ, dễ nhớ.
+- Dễ dùng trong form, dashboard, admin, portal.
+- Dễ override theme bằng CSS Variables.
+- Component ổn định, ít breaking change.
+- Tận dụng Angular built-in và Angular CDK trước.
+- Code ít nhất có thể nhưng vẫn đủ production-ready.
+
+Không làm:
+
+- Không biến component thành “siêu component” ôm mọi case.
+- Không thêm feature chỉ vì thư viện khác có.
+- Không tạo architecture phức tạp khi chưa có nhu cầu thật.
+- Không tạo token/helper/service/utility thừa.
+- Không copy PrimeNG, shadcn/ui, Angular Material; chỉ học cách tổ chức tốt của họ.
+
+Rule quan trọng nhất:
+
+> Ít code nhất có thể, đúng nhu cầu nhất có thể, dễ mở rộng khi thật sự cần.
+
+---
 
 ## 2. Công nghệ mặc định
 
+Bắt buộc:
+
 - Angular v21.
 - TypeScript strict mode.
-- Standalone components.
+- Standalone components/directives.
+- Signal-style API: `input()`, `output()`, `computed()`, `contentChild()` khi phù hợp.
+- `ChangeDetectionStrategy.OnPush`.
 - SCSS.
 - CSS Variables cho theme.
-- Ưu tiên dùng những gì Angular cung cấp sẵn.
-- Ưu tiên Angular CDK cho các nền tảng như overlay, portal, a11y, drag-drop, layout nếu cần.
-- Không dùng PrimeNG.
-- Không dùng dependency UI nặng khác.
-- Không dùng thư viện ngoài nếu Angular hoặc Angular CDK đã đáp ứng được.
+- Native HTML element đúng semantic trước tiên.
 
-## 3. Nguyên tắc code chung
+Không dùng:
+
+- PrimeNG.
+- Angular Material làm UI nền.
+- Bootstrap, Ant Design, MUI hoặc UI dependency nặng khác.
+- Dependency ngoài nếu Angular/CDK đã xử lý được.
+
+Thứ tự quyết định khi cần behavior phức tạp:
+
+1. Angular built-in xử lý được không?
+2. Angular CDK có primitive phù hợp không?
+3. Tự viết phần nhỏ, tối giản.
+4. Chỉ dùng thư viện ngoài khi thật sự bắt buộc và phải giải thích lý do.
+
+---
+
+## 3. Nguyên tắc code
 
 Luôn ưu tiên:
 
 - Code ngắn gọn.
 - Dễ hiểu hơn là quá thông minh.
 - Tận dụng code và pattern đang có.
-- Chỉ viết mới khi thật sự cần thiết.
-- Không tạo function/helper/key/constant/service thừa.
-- Không tách file quá sớm nếu logic còn đơn giản.
-- Không over-engineer.
-- Không tạo kiến trúc phức tạp khi chưa có nhu cầu thực tế.
-
-Khi sửa hoặc thêm component:
-
-- Làm thay đổi nhỏ nhất để đạt yêu cầu.
-- Giữ style và convention đang có.
-- Không đổi cấu trúc lớn nếu không cần.
+- Thay đổi nhỏ nhất để đạt yêu cầu.
+- Không đổi public API cũ nếu tránh được.
 - Không tự ý thêm dependency.
-- Không đổi public API cũ nếu có thể tránh.
+- Không tách file quá sớm nếu logic còn đơn giản.
 
-## 4. Cấu trúc thư mục chuẩn
+Không làm:
+
+- Không tạo function/helper/key/constant/service thừa.
+- Không tạo abstraction “để sau này dùng”.
+- Không nhồi nhiều feature hiếm vào component ban đầu.
+- Không tạo folder rỗng cho đẹp cấu trúc.
+- Không tạo passthrough API kiểu `style`, `styleClass`, `pt`, `dt`, `unstyled` nếu chưa thật sự cần.
+
+---
+
+## 4. Quy tắc đặt tên file
+
+Dự án bắt buộc dùng suffix Angular rõ nghĩa.
+
+Component:
+
+```txt
+button.component.ts
+button.component.html
+button.component.scss
+button.component.spec.ts
+```
+
+Directive:
+
+```txt
+button-icon.directive.ts
+auto-focus.directive.ts
+```
+
+Service:
+
+```txt
+theme.service.ts
+```
+
+Pipe:
+
+```txt
+safe-html.pipe.ts
+```
+
+Util:
+
+```txt
+coerce-boolean.util.ts
+```
+
+Types/model:
+
+```txt
+button.types.ts
+button.model.ts
+```
+
+Không dùng:
+
+```txt
+button.ts
+button.html
+utils.ts
+helpers.ts
+constants.ts
+```
+
+trừ khi có lý do thật sự rõ.
+
+---
+
+## 5. Class, selector, CSS naming
+
+Component class dùng prefix `T`:
+
+```ts
+export class TButton {}
+export class TInput {}
+export class TCard {}
+```
+
+Selector public dùng prefix `t-`:
+
+```html
+<t-button />
+<t-input />
+<t-card />
+```
+
+Không dùng prefix `ui-`.
+
+CSS class nội bộ dùng prefix `t-` và BEM nhẹ:
+
+```scss
+.t-button {}
+.t-button__icon {}
+.t-button__label {}
+.t-button--primary {}
+.t-button--loading {}
+```
+
+Không dùng class mơ hồ hoặc lệch convention:
+
+```scss
+.button {}
+.ui-button {}
+.t-button-primary {}
+```
+
+---
+
+## 6. Cấu trúc thư mục library
 
 Cấu trúc khuyến nghị:
 
@@ -60,107 +195,22 @@ projects/
       lib/
         components/
           button/
-          input/
-          card/
+            button.component.ts
+            button.component.html
+            button.component.scss
+            button.component.spec.ts
+            button.types.ts
+            button-icon.directive.ts
         directives/
         services/
         styles/
-          _variables.scss
-          _mixins.scss
           theme.scss
       public-api.ts
-  demo/
-    src/
-      app/
 ```
 
-Chỉ tạo thư mục mới khi có nhu cầu thật.
+Chỉ tạo folder/file khi có nhu cầu thật. Không tạo folder rỗng cho đẹp.
 
-Ví dụ:
-
-- `components/` chỉ chứa component UI.
-- `directives/` chỉ tạo khi có directive thật sự dùng lại.
-- `services/` chỉ tạo khi có service thật sự cần chia sẻ.
-- `styles/` chứa theme, variables, mixins dùng chung.
-
-Không tạo sẵn nhiều folder rỗng nếu chưa dùng.
-
-## 5. Quy tắc đặt tên
-
-Component class:
-
-```ts
-TButton
-TInput
-TCard
-```
-
-Selector bắt buộc dùng prefix `t-`:
-
-```html
-<t-button />
-<t-input />
-<t-card />
-```
-
-Không dùng prefix `ui-` cho selector public.
-
-File name:
-
-```txt
-button.ts
-button.html
-button.scss
-```
-
-Hoặc nếu project đang theo convention Angular mặc định:
-
-```txt
-button.component.ts
-button.component.html
-button.component.scss
-```
-
-Ưu tiên giữ thống nhất với cấu trúc đang có.
-
-## 5.1. Quy tắc ưu tiên Angular / CDK
-
-Khi xây component, luôn kiểm tra theo thứ tự:
-
-1. Angular built-in có xử lý được không?
-2. Angular CDK có primitive phù hợp không?
-3. Tự viết phần nhỏ, tối giản nếu Angular/CDK chưa có sẵn.
-4. Chỉ dùng thư viện ngoài khi Angular/CDK thật sự không đáp ứng được.
-
-Ví dụ nên dùng Angular CDK cho:
-
-- Overlay, dialog, popover, tooltip.
-- Portal.
-- Accessibility, focus trap, keyboard navigation.
-- Drag-drop.
-- Virtual scroll nếu cần.
-
-Không tự viết lại các nền tảng phức tạp này nếu CDK đã có sẵn.
-
-## 6. Quy tắc component
-
-Mỗi component nên:
-
-- Là standalone component.
-- Có API đơn giản.
-- Dùng `input()` / `output()` nếu project đang dùng Angular signal-style API.
-- Hạn chế logic phức tạp trong component.
-- Không tự xử lý quá nhiều case hiếm ngay từ đầu.
-- Hỗ trợ accessibility cơ bản khi cần.
-- Có style scoped theo component.
-- Dùng CSS Variables thay vì hardcode màu tràn lan.
-
-Không nên:
-
-- Nhồi quá nhiều feature vào component ngay từ đầu.
-- Tạo quá nhiều variant khi chưa dùng.
-- Tạo service riêng cho component nếu chưa cần.
-- Tạo token/config global nếu component chưa có nhu cầu thật.
+---
 
 ## 7. Public API
 
@@ -169,136 +219,267 @@ Mọi component/directive/service muốn dùng bên ngoài phải export qua `pu
 Ví dụ:
 
 ```ts
-export * from './lib/components/button/button';
-export * from './lib/components/input/input';
-export * from './lib/components/card/card';
+export * from './lib/components/button/button.component';
+export * from './lib/components/button/button-icon.directive';
+export * from './lib/components/button/button.types';
 ```
 
-Không export internal file nếu không muốn người dùng library phụ thuộc vào nó.
+Không export:
+
+- Demo component.
+- File internal.
+- Helper chưa muốn public.
+- Experimental API.
 
 Public API phải ổn định, tránh đổi tên tùy tiện.
 
-## 8. Style và theme
+---
+
+## 8. API design
+
+API phải ngắn, rõ, dễ đoán.
+
+Ví dụ tốt:
+
+```html
+<t-button variant="primary" size="md" loading>
+  Lưu thay đổi
+</t-button>
+```
+
+Input nên dùng tên ngắn:
+
+- `variant`
+- `size`
+- `type`
+- `disabled`
+- `loading`
+- `fluid`
+- `rounded`
+- `raised`
+- `icon`
+- `iconSrc`
+- `iconPosition`
+- `iconOnly`
+- `ariaLabel`
+
+Output dùng tên hành động rõ:
+
+- `clicked`
+- `closed`
+- `selected`
+- `changed`
+
+Không thêm alias/API phụ nếu chưa cần.
+
+---
+
+## 9. Accessibility
+
+Accessibility là bắt buộc.
+
+Rule chung:
+
+- Dùng native element đúng semantic trước tiên.
+- Button phải render native `<button>` nếu là action.
+- Link/navigation phải dùng `<a>` hoặc component/link riêng, không nhét router behavior vào button.
+- Icon-only button bắt buộc có accessible name qua `aria-label` hoặc input compatibility như `ariaLabel`.
+- Disabled state phải dùng native `disabled` nếu là button.
+- Loading state nên có `aria-busy` khi phù hợp.
+- Icon/spinner decorative dùng `aria-hidden="true"`.
+- Focus state phải nhìn rõ bằng keyboard.
+- Không remove outline nếu không thay bằng focus ring tốt hơn.
+- Không đặt `<ng-content>` bên trong `@if`, `@else`, `@for`, `@switch`; nếu cần ẩn, ẩn wrapper bằng `[hidden]` hoặc class.
+
+Dùng Angular CDK a11y khi cần:
+
+- FocusTrap.
+- FocusMonitor.
+- LiveAnnouncer.
+- InteractivityChecker.
+- ListKeyManager.
+
+Không kéo CDK vào component nếu native HTML đã đủ.
+
+---
+
+## 10. Style và theme
 
 Theme mặc định dùng CSS Variables.
 
-Ví dụ biến nền tảng:
+Biến nền tảng nên có:
 
 ```scss
 :root {
   --t-primary: #2563eb;
+  --t-primary-hover: #1d4ed8;
+  --t-primary-contrast: #ffffff;
+  --t-primary-ring: rgba(37, 99, 235, 0.35);
+
+  --t-secondary: #64748b;
+  --t-secondary-hover: #475569;
+  --t-secondary-ring: rgba(100, 116, 139, 0.35);
+
+  --t-success: #16a34a;
+  --t-success-hover: #15803d;
+  --t-success-ring: rgba(22, 163, 74, 0.35);
+
+  --t-info: #0284c7;
+  --t-info-hover: #0369a1;
+  --t-info-ring: rgba(2, 132, 199, 0.35);
+
+  --t-warning: #d97706;
+  --t-warning-hover: #b45309;
+  --t-warning-ring: rgba(217, 119, 6, 0.35);
+
+  --t-danger: #dc2626;
+  --t-danger-hover: #b91c1c;
+  --t-danger-ring: rgba(220, 38, 38, 0.35);
+
   --t-surface: #ffffff;
+  --t-muted-surface: #f8fafc;
   --t-text: #111827;
   --t-muted-text: #6b7280;
-  --t-border: #e5e7eb;
+  --t-border: #d1d5db;
+  --t-border-strong: #cbd5e1;
   --t-radius: 0.75rem;
   --t-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
   --t-transition: 150ms ease;
 }
 ```
 
-Quy tắc style:
+Rule style:
 
 - Không hardcode màu nếu có thể dùng variable.
-- Không lạm dụng mixin.
-- Không tạo design token phức tạp khi chưa cần.
-- Ưu tiên style hiện đại, sạch, dễ override.
-- Component phải hoạt động ổn với theme mặc định.
+- Component token dùng prefix theo component, ví dụ `--t-button-bg`.
+- Focus ring dùng biến riêng của component, ví dụ `--t-button-ring`.
+- Có hover/active/focus/disabled/loading rõ.
+- Có `box-sizing: border-box` cho component chính.
+- Có `min-width: 0` cho label trong flex nếu text có thể dài.
+- Có `prefers-reduced-motion` nếu dùng transition/animation.
+- Không lạm dụng mixin hoặc design token quá sâu khi chưa cần.
 
-## 9. Demo app
+---
 
-Demo app chỉ dùng để test và xem component.
+## 11. Demo app
 
-Demo nên:
+Demo app không được nhét demo trực tiếp vào `app.component`.
 
-- Import trực tiếp component từ library.
-- Hiển thị các trạng thái cơ bản.
-- Có layout đơn giản, dễ nhìn.
-- Không chứa logic nghiệp vụ.
-- Không biến demo thành app phức tạp.
+Mỗi component có demo page riêng và route riêng.
 
-## 10. Dependency
-
-Không thêm dependency mới nếu chưa có lý do rõ ràng.
-
-Được ưu tiên dùng:
-
-- Angular built-in API trước.
-- Angular CDK cho overlay, portal, a11y, drag-drop, focus management, layout nếu phù hợp.
-
-Không dùng:
-
-- PrimeNG.
-- Bootstrap, Material UI, Ant Design hoặc thư viện UI khác làm nền.
-- Dependency ngoài chỉ để làm việc Angular/CDK đã có thể làm tốt.
-
-Nếu bắt buộc thêm dependency ngoài, phải giải thích:
-
-- Nó giải quyết vấn đề gì.
-- Vì sao không tự làm đơn giản hơn.
-- Có ảnh hưởng bundle size không.
-
-## 11. Build và publish
-
-Library phải build được bằng Angular CLI.
-
-Lệnh cơ bản:
-
-```bash
-ng build ui
-```
-
-Output mặc định:
+Ví dụ:
 
 ```txt
-dist/ui
+projects/
+  demo/
+    src/
+      app/
+        app.component.ts
+        app.component.html
+        app.routes.ts
+        pages/
+          button-demo/
+            button-demo.component.ts
+            button-demo.component.html
+            button-demo.component.scss
 ```
 
-Trước khi publish:
-
-- Kiểm tra build thành công.
-- Kiểm tra public API.
-- Kiểm tra package metadata.
-- Không publish file demo app.
-- Không export file nội bộ không cần thiết.
-
-## 12. Checklist khi thêm component mới
-
-Trước khi thêm component mới, cần kiểm tra:
-
-- Component này có thật sự cần trong library không?
-- Có component cũ nào tận dụng được không?
-- API có đủ đơn giản chưa?
-- Style có dùng CSS Variables chưa?
-- Có export trong `public-api.ts` chưa?
-- Demo app đã có ví dụ tối thiểu chưa?
-- Build library có pass không?
-
-## 13. Phong cách mong muốn
-
-Thư viện này hướng tới UI:
-
-- Hiện đại.
-- Gọn.
-- Cao cấp hơn PrimeNG về cảm giác giao diện.
-- Dễ tùy biến theme.
-- Dễ dùng trong form, dashboard, admin, portal.
-- Không rườm rà.
-
-Ưu tiên trải nghiệm developer:
+`app.component` chỉ làm shell:
 
 ```html
-<t-button variant="primary" size="md">
-  Lưu thay đổi
-</t-button>
+<nav class="demo-nav">
+  <a routerLink="/button">Button</a>
+</nav>
+
+<main class="demo-main">
+  <router-outlet />
+</main>
 ```
 
-Thay vì API quá dài hoặc quá nhiều config.
+Route:
 
-## 14. Rule quan trọng nhất
+```ts
+export const routes: Routes = [
+  {
+    path: 'button',
+    loadComponent: () =>
+      import('./pages/button-demo/button-demo.component').then((m) => m.ButtonDemoComponent),
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'button' },
+];
+```
 
-Luôn làm theo nguyên tắc:
+Không viết toàn bộ demo vào `app.component`.
 
-> Ít code nhất có thể, đúng nhu cầu nhất có thể, dễ mở rộng khi thật sự cần.
+---
 
-Không vẽ vời kiến trúc. Không tạo thứ chưa dùng. Không thêm complexity chỉ vì “sau này có thể cần”.
+## 12. Test
+
+Mỗi component public nên có `.component.spec.ts`.
+
+Test tối thiểu:
+
+- Component tạo được.
+- Default value quan trọng.
+- Native semantic đúng.
+- Disabled/loading behavior.
+- Output emit đúng.
+- Không emit khi disabled/loading nếu có.
+- Accessibility chính.
+- Projected content nếu component dùng content projection.
+- Variant/size class nếu là public API.
+- Edge case đã từng fix để tránh regression.
+
+Không viết test quá rườm rà cho logic đơn giản, nhưng các behavior public phải có coverage.
+
+---
+
+## 13. Checklist khi thêm component mới
+
+Trước khi coi component là xong:
+
+- [ ] File name đúng suffix.
+- [ ] Component standalone.
+- [ ] Selector dùng `t-`.
+- [ ] Class dùng prefix `T`.
+- [ ] `ChangeDetectionStrategy.OnPush`.
+- [ ] API public ít nhưng đủ dùng.
+- [ ] Dùng `input()` / `output()` nếu project theo signal-style.
+- [ ] Không thêm dependency ngoài.
+- [ ] Không thêm service/helper/token thừa.
+- [ ] Accessibility cơ bản ổn.
+- [ ] Style dùng CSS Variables.
+- [ ] Focus-visible rõ.
+- [ ] Disabled/loading rõ nếu có.
+- [ ] Có spec test public behavior.
+- [ ] Có demo page riêng.
+- [ ] Có route demo riêng.
+- [ ] Export public API đúng.
+- [ ] `ng build ui` pass.
+- [ ] Test pass.
+
+---
+
+## 14. Component spec file chuẩn
+
+Khi viết file chuẩn cho từng component, dùng cấu trúc này:
+
+```txt
+# T<Component> Standard
+
+## 1. Mục tiêu
+## 2. File structure
+## 3. Public API
+## 4. Behavior
+## 5. Accessibility
+## 6. Template rules
+## 7. Style rules
+## 8. Demo requirements
+## 9. Test requirements
+## 10. Public API export
+## 11. Không được làm
+## 12. Acceptance checklist
+## 13. Current reference implementation
+```
+
+Component sau có thể lấy `button.md` làm mẫu.
