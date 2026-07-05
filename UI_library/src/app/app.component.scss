@@ -1,38 +1,94 @@
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-.demo-nav {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid var(--t-border, #e5e7eb);
+.demo-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  background: var(--t-muted-surface, #f8fafc);
+  color: var(--t-text, #111827);
+}
+
+.demo-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow-y: auto;
+  border-right: 1px solid var(--t-border, #e5e7eb);
   background: var(--t-surface, #ffffff);
+  padding: 1rem;
 }
 
-.demo-nav a {
-  border-radius: 999px;
-  color: var(--t-muted-text, #6b7280);
-  font-weight: 600;
-  padding: 0.5rem 0.875rem;
+.demo-brand {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0 0.75rem;
+  color: var(--t-text, #111827);
+  font-weight: 700;
   text-decoration: none;
 }
 
-.demo-nav a:hover,
-.demo-nav a.active {
+.demo-nav {
+  margin-top: 1.5rem;
+}
+
+.demo-nav__section + .demo-nav__section {
+  margin-top: 1.5rem;
+}
+
+.demo-nav__title {
+  margin: 0 0 0.5rem;
+  padding: 0 0.75rem;
+  color: var(--t-muted-text, #64748b);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.demo-nav__link {
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  border-radius: 0.625rem;
+  color: var(--t-muted-text, #475569);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.demo-nav__link:hover {
   background: var(--t-muted-surface, #f1f5f9);
   color: var(--t-text, #111827);
 }
 
-.demo-main {
-  padding: 2rem;
+.demo-nav__link--active {
+  background: var(--t-primary-soft, #eff6ff);
+  color: var(--t-primary, #2563eb);
 }
 
-@media (max-width: 520px) {
-  .demo-nav,
+.demo-main {
+  min-width: 0;
+  padding: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .demo-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--t-border, #e5e7eb);
+  }
+
   .demo-main {
-    padding-inline: 1rem;
+    padding: 1rem;
   }
 }

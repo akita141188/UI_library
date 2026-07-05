@@ -1,7 +1,23 @@
-<nav class="demo-nav" aria-label="Demo navigation">
-  <a routerLink="/button" routerLinkActive="active">Button</a>
-</nav>
+<div class="demo-shell">
+  <aside class="demo-sidebar" aria-label="Demo navigation">
+    <a class="demo-brand" routerLink="/">TRỤC UI</a>
 
-<main class="demo-main">
-  <router-outlet />
-</main>
+    <nav class="demo-nav">
+      <section class="demo-nav__section">
+        <p class="demo-nav__title">Components</p>
+
+        <a class="demo-nav__link" routerLink="/button" routerLinkActive="demo-nav__link--active">
+          Button
+        </a>
+
+        <a class="demo-nav__link" routerLink="/input" routerLinkActive="demo-nav__link--active">
+          Input
+        </a>
+      </section>
+    </nav>
+  </aside>
+
+  <main class="demo-main">
+    <router-outlet />
+  </main>
+</div>

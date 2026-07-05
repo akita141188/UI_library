@@ -1,0 +1,91 @@
+.t-input {
+  --t-input-height: 2.5rem;
+  --t-input-padding-x: 0.75rem;
+  --t-input-bg: var(--t-surface, #ffffff);
+  --t-input-color: var(--t-text, #111827);
+  --t-input-border: var(--t-border, #cbd5e1);
+  --t-input-placeholder: var(--t-muted-text, var(--t-text-muted, #6b7280));
+  --t-input-hover-border: var(--t-border-strong, #94a3b8);
+  --t-input-focus-border: var(--t-primary, #2563eb);
+  --t-input-ring: var(--t-primary-ring, rgba(37, 99, 235, 0.24));
+  --t-input-radius: var(--t-radius-md, 0.5rem);
+  --t-input-font-size: 0.875rem;
+
+  box-sizing: border-box;
+  width: auto;
+  min-width: 0;
+  height: var(--t-input-height);
+  padding-inline: var(--t-input-padding-x);
+  border: 1px solid var(--t-input-border);
+  border-radius: var(--t-input-radius);
+  background: var(--t-input-bg);
+  color: var(--t-input-color);
+  font: inherit;
+  font-size: var(--t-input-font-size);
+  line-height: 1.25;
+  outline: none;
+  transition:
+    border-color var(--t-transition, 150ms ease),
+    box-shadow var(--t-transition, 150ms ease),
+    background-color var(--t-transition, 150ms ease);
+}
+
+.t-input::placeholder {
+  color: var(--t-input-placeholder);
+}
+
+.t-input:hover:not(:disabled):not([readonly]) {
+  border-color: var(--t-input-hover-border);
+}
+
+.t-input:focus,
+.t-input:focus-visible {
+  border-color: var(--t-input-focus-border);
+  box-shadow: 0 0 0 3px var(--t-input-ring);
+}
+
+.t-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.t-input[readonly] {
+  background: var(--t-muted-surface, #f8fafc);
+}
+
+.t-input--sm {
+  --t-input-height: 2rem;
+  --t-input-padding-x: 0.625rem;
+  --t-input-font-size: 0.8125rem;
+}
+
+.t-input--md {
+  --t-input-height: 2.5rem;
+  --t-input-padding-x: 0.75rem;
+  --t-input-font-size: 0.875rem;
+}
+
+.t-input--lg {
+  --t-input-height: 3rem;
+  --t-input-padding-x: 1rem;
+  --t-input-font-size: 0.9375rem;
+}
+
+.t-input--error,
+.t-input.ng-invalid.ng-touched,
+.t-input.ng-invalid.ng-dirty {
+  --t-input-border: var(--t-danger, #dc2626);
+  --t-input-hover-border: var(--t-danger, #dc2626);
+  --t-input-focus-border: var(--t-danger, #dc2626);
+  --t-input-ring: var(--t-danger-ring, rgba(220, 38, 38, 0.22));
+}
+
+.t-input--fluid {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-input {
+    transition: none;
+  }
+}

@@ -25,7 +25,9 @@ describe('AppComponent', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('nav a')?.textContent).toContain('Button');
+    expect(compiled.querySelector('.demo-sidebar')).toBeTruthy();
+    expect(compiled.querySelector('.demo-brand')?.textContent).toContain('TRỤC UI');
+    expect(compiled.querySelector('.demo-nav__link')?.textContent).toContain('Button');
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });

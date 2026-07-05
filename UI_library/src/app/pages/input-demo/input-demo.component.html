@@ -1,0 +1,113 @@
+<section class="demo-page">
+  <header class="demo-hero">
+    <h1>Input</h1>
+    <p>Native text inputs styled with small, predictable design-system hooks.</p>
+  </header>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Basic</h2>
+      <p>Use the directive directly on native inputs.</p>
+    </div>
+    <div class="demo-stack">
+      <input tInput placeholder="Enter name" />
+      <input tInput placeholder="Email" type="email" autocomplete="email" />
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Sizes</h2>
+      <p>Three sizes cover dense, standard, and spacious layouts.</p>
+    </div>
+    <div class="demo-stack">
+      <input tInput tSize="sm" placeholder="Small" />
+      <input tInput tSize="md" placeholder="Medium" />
+      <input tInput tSize="lg" placeholder="Large" />
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Fluid</h2>
+      <p>Fluid inputs fill their available inline space.</p>
+    </div>
+    <input tInput tFluid placeholder="Full width" />
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Disabled / Readonly</h2>
+      <p>Native disabled and readonly behavior stays intact.</p>
+    </div>
+    <div class="demo-stack">
+      <input tInput disabled value="Disabled value" />
+      <input tInput readonly value="Readonly value" />
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Error State</h2>
+      <p>Visual state remains separate from ARIA state.</p>
+    </div>
+    <input tInput tState="error" aria-invalid="true" placeholder="Required field" />
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Native Input Types</h2>
+      <p>Text-like input types continue to use browser behavior.</p>
+    </div>
+    <div class="demo-grid">
+      <input tInput type="text" placeholder="Text" />
+      <input tInput type="email" placeholder="Email" autocomplete="email" />
+      <input tInput type="password" placeholder="Password" autocomplete="current-password" />
+      <input tInput type="search" placeholder="Search" />
+      <input tInput type="tel" placeholder="Telephone" autocomplete="tel" />
+      <input tInput type="url" placeholder="URL" />
+      <input tInput type="number" placeholder="Number" />
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Reactive Forms</h2>
+      <p>Angular form controls bind directly to the native input.</p>
+    </div>
+    <div class="demo-stack">
+      <input tInput [formControl]="nameControl" placeholder="Name" />
+      <p class="demo-value">Current value: {{ nameControl.value }}</p>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>Label And Error Text</h2>
+      <p>Consumers connect labels and messages with native attributes.</p>
+    </div>
+    <div class="demo-field">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        tInput
+        tState="error"
+        aria-invalid="true"
+        aria-describedby="username-error"
+        placeholder="Username"
+      />
+      <p id="username-error" class="demo-error">Username is required.</p>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="demo-section__header">
+      <h2>With TButton</h2>
+      <p>Native form submission works with a button action.</p>
+    </div>
+    <form class="demo-form" (submit)="$event.preventDefault()">
+      <input tInput tFluid name="keyword" placeholder="Keyword" [formControl]="searchControl" />
+      <t-button type="submit">Search</t-button>
+    </form>
+  </section>
+</section>

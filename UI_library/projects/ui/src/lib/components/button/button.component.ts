@@ -41,6 +41,8 @@ export class TButton {
   iconSrc = input<string | null>(null);
   iconPosition = input<TButtonIconPosition>('left');
   ariaLabel = input<string | null>(null);
+  // eslint-disable-next-line @angular-eslint/no-input-rename -- Keep native aria-label passthrough for icon-only accessibility.
+  ariaLabelAttr = input<string | null>(null, { alias: 'aria-label' });
   tabindex = input<number | null, unknown>(null, {
     transform: (value) => (value == null ? null : numberAttribute(value)),
   });
@@ -68,7 +70,7 @@ export class TButton {
   iconOnRight = computed(
     () => this.showIcon() && !this.iconOnly() && this.iconPosition() === 'right',
   );
-  accessibleLabel = computed(() => this.ariaLabel());
+  accessibleLabel = computed(() => this.ariaLabelAttr() ?? this.ariaLabel());
   iconSourceCount = computed(
     () => Number(this.hasProjectedIcon()) + Number(this.hasIconSrc()) + Number(this.hasIconInput()),
   );

@@ -1,26 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import 'tailwindcss';
+@use '../projects/ui/src/styles';
 
 :root {
   --t-primary: #2563eb;
   --t-primary-hover: #1d4ed8;
+  --t-primary-contrast: #ffffff;
+  --t-primary-ring: rgba(37, 99, 235, 0.35);
+  --t-primary-soft: #eff6ff;
   --t-secondary: #64748b;
   --t-secondary-hover: #475569;
+  --t-secondary-ring: rgba(100, 116, 139, 0.35);
   --t-success: #16a34a;
   --t-success-hover: #15803d;
+  --t-success-ring: rgba(22, 163, 74, 0.35);
   --t-info: #0284c7;
   --t-info-hover: #0369a1;
+  --t-info-ring: rgba(2, 132, 199, 0.35);
   --t-warning: #d97706;
   --t-warning-hover: #b45309;
+  --t-warning-ring: rgba(217, 119, 6, 0.35);
   --t-danger: #dc2626;
   --t-danger-hover: #b91c1c;
+  --t-danger-ring: rgba(220, 38, 38, 0.35);
   --t-surface: #ffffff;
   --t-surface-muted: #f8fafc;
   --t-muted-surface: #f1f5f9;
   --t-text: #111827;
   --t-muted-text: #6b7280;
-  --t-border: #e5e7eb;
+  --t-border: #d1d5db;
+  --t-border-strong: #cbd5e1;
   --t-radius: 0.75rem;
   --t-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
   --t-transition: 150ms ease;

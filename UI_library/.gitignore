@@ -45,3 +45,5 @@ Thumbs.db
 
 /node_modules
 /Agent
+dev-server-*.log
+*.err.log

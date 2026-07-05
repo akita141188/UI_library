@@ -7,6 +7,11 @@ export const routes: Routes = [
       import('./pages/button-demo/button-demo.component').then((m) => m.ButtonDemoComponent),
   },
   {
+    path: 'input',
+    loadComponent: () =>
+      import('./pages/input-demo/input-demo.component').then((m) => m.InputDemoComponent),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'button',
